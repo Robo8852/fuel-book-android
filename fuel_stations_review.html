@@ -1,0 +1,2805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covenant Fuel Stations - Complete Data Review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #1e3a8a;
+        }
+        .header h1 {
+            color: #1e3a8a;
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .coverage-notice {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #92400e;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-card.warning {
+            background: linear-gradient(135deg, #dc2626, #f87171);
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .state-section {
+            margin-bottom: 40px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .state-section.canada {
+            border-color: #dc2626;
+            background: #fef2f2;
+        }
+        .state-section.no-stations {
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
+        .state-header {
+            background: #1e3a8a;
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .state-header.canada {
+            background: #dc2626;
+        }
+        .state-header.no-stations {
+            background: #f59e0b;
+            color: #92400e;
+        }
+        .stations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .no-stations-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #92400e;
+            grid-column: 1 / -1;
+        }
+        .no-stations-message h3 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        .no-stations-message p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .suggested-states {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .suggested-state {
+            background: #f59e0b;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .station-card {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fafafa;
+        }
+        .station-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .station-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #1e3a8a;
+        }
+        .brand-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .brand-ta {
+            background: #3b82f6;
+            color: white;
+        }
+        .brand-petro {
+            background: #10b981;
+            color: white;
+        }
+        .site-type {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .exclusive {
+            background: #fbbf24;
+            color: #92400e;
+        }
+        .primary {
+            background: #60a5fa;
+            color: #1e40af;
+        }
+        .limited {
+            background: #a78bfa;
+            color: #5b21b6;
+        }
+        .station-details {
+            font-size: 0.9em;
+            color: #374151;
+            line-height: 1.4;
+        }
+        .station-details div {
+            margin-bottom: 5px;
+        }
+        .label {
+            font-weight: bold;
+            color: #6b7280;
+        }
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #d1d5db;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn.active {
+            background: #1e3a8a;
+            color: white;
+            border-color: #1e3a8a;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚛 Covenant Fuel Stations</h1>
+            <p>Complete Data Review - 133 Total Stations</p>
+        </div>
+        
+        <div class="coverage-notice">
+            ⚠️ <strong>Coverage Note:</strong> 41 states have fuel stations, 9 states have no stations
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">41</div>
+                <div>States with Stations</div>
+            </div>
+            <div class="stat-card warning">
+                <div class="stat-number">9</div>
+                <div>States without Stations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">133</div>
+                <div>Total Stations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">🇨🇦</div>
+                <div>Canada Coverage</div>
+            </div>
+        </div>
+        
+        <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search by station name, city, or state...">
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All States</button>
+            <button class="filter-btn" data-filter="with-stations">States with Stations</button>
+            <button class="filter-btn" data-filter="no-stations">States without Stations</button>
+            <button class="filter-btn" data-filter="ta">TA Only</button>
+            <button class="filter-btn" data-filter="petro">Petro Only</button>
+        </div>
+
+        <div class="state-section" data-state="alabama">
+            <div class="state-header">
+                <span>📍 ALABAMA</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#348 Petro Shorter</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 428 Main Street</div>
+                        <div><span class="label">Location:</span> Shorter, AL 36075</div>
+                        <div><span class="label">Exit:</span> I-85, Exit 22</div>
+                        <div><span class="label">Phone:</span> (334) 727-3354</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE348</div>
+                        <div><span class="label">Fax:</span> (334) 727-3576</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#016 TA Tuscaloosa</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 3501 Buttermilk Road</div>
+                        <div><span class="label">Location:</span> Cottondale, AL 35453</div>
+                        <div><span class="label">Exit:</span> I-20/I-59, Exit 77</div>
+                        <div><span class="label">Phone:</span> (205) 554-0215</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA016</div>
+                        <div><span class="label">Fax:</span> (205) 553-0146</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section no-stations" data-state="alaska">
+            <div class="state-header no-stations">
+                <span>❌ ALASKA</span>
+                <span>0 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="no-stations-message">
+                    <h3>❌ No Covenant Fuel Stations Available</h3>
+                    <p>There are currently no fuel stations in ALASKA</p>
+                    <div class="suggested-states">
+                        <span class="suggested-state">Try nearby states:</span><span class="suggested-state">WASHINGTON</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="arizona">
+            <div class="state-header">
+                <span>📍 ARIZONA</span>
+                <span>4 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#306 Petro Eloy</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 5235 North Sunland Gin Road</div>
+                        <div><span class="label">Location:</span> Eloy, AZ 85131</div>
+                        <div><span class="label">Exit:</span> I-10, Exit 200</div>
+                        <div><span class="label">Phone:</span> (520) 836-3983</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE306</div>
+                        <div><span class="label">Fax:</span> (520) 836-3254</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#007 TA Eloy</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2949 North Toltec Road</div>
+                        <div><span class="label">Location:</span> Eloy, AZ 85131</div>
+                        <div><span class="label">Exit:</span> I-10, Exit 203</div>
+                        <div><span class="label">Phone:</span> (520) 466-7363</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA007</div>
+                        <div><span class="label">Fax:</span> (520) 466-7536</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#315 Petro Kingman</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 970 South Blake Ranch Road</div>
+                        <div><span class="label">Location:</span> Kingman, AZ 86401</div>
+                        <div><span class="label">Exit:</span> I-40, Exit 66</div>
+                        <div><span class="label">Phone:</span> (928) 681-5246</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE315</div>
+                        <div><span class="label">Fax:</span> (928) 681-5245</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#225 TA Tonopah</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1010 N. 339th Avenue</div>
+                        <div><span class="label">Location:</span> Tonopah, AZ 85354</div>
+                        <div><span class="label">Exit:</span> I-10, Exit 103</div>
+                        <div><span class="label">Phone:</span> (623) 386-6443</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA225</div>
+                        <div><span class="label">Fax:</span> (623) 386-5242</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="arkansas">
+            <div class="state-header">
+                <span>📍 ARKANSAS</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#326 Petro North</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> Little Rock</div>
+                        <div><span class="label">Location:</span> 3205 Valentine Road</div>
+                        <div><span class="label">Exit:</span> North Little Rock, AR 72117</div>
+                        <div><span class="label">Phone:</span> (501) 945-3206</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE326</div>
+                        <div><span class="label">Fax:</span> (501) 955-4008</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#311 Petro W. Memphis</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 3900 Petro Rd</div>
+                        <div><span class="label">Location:</span> West Memphis, AR 72301</div>
+                        <div><span class="label">Exit:</span> I-40, Exit 280/ I-55, Exit 4</div>
+                        <div><span class="label">Phone:</span> (870) 702-5540</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE311</div>
+                        <div><span class="label">Fax:</span> (870)702-5547</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="california">
+            <div class="state-header">
+                <span>📍 CALIFORNIA</span>
+                <span>4 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#040 TA Corning</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 3524 South Highway 99 W</div>
+                        <div><span class="label">Location:</span> Corning, CA 96021</div>
+                        <div><span class="label">Exit:</span> I-5, Exit 630</div>
+                        <div><span class="label">Phone:</span> (530) 824-4646</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA040</div>
+                        <div><span class="label">Fax:</span> (530) 824-0547</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#170 TA Livingston</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 435 Winton Parkway</div>
+                        <div><span class="label">Location:</span> Livingston, CA 95334</div>
+                        <div><span class="label">Exit:</span> SR 99, Exit 203</div>
+                        <div><span class="label">Phone:</span> (209) 394-4418</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA170</div>
+                        <div><span class="label">Fax:</span> (209) 394-1419</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#162 TA Ontario*</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 4265 East Guasti Road</div>
+                        <div><span class="label">Location:</span> Ontario, CA 91761</div>
+                        <div><span class="label">Exit:</span> I-10, Exit 57</div>
+                        <div><span class="label">Phone:</span> (909) 390-2525</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA162</div>
+                        <div><span class="label">Fax:</span> (909) 605-6765</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#163 TA Santa Nella</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 12310 California Hwy 33</div>
+                        <div><span class="label">Location:</span> Santa Nella, CA 95322</div>
+                        <div><span class="label">Exit:</span> I-5, Exit 407</div>
+                        <div><span class="label">Phone:</span> (209) 826-0741</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA163</div>
+                        <div><span class="label">Fax:</span> (209) 826-6399</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section canada" data-state="canada">
+            <div class="state-header canada">
+                <span>🇨🇦 CANADA</span>
+                <span>1 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#601 TA Woodstock</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 535 Mill Street N4S 7V6</div>
+                        <div><span class="label">Location:</span> Woodstock, ON N4S 0A9</div>
+                        <div><span class="label">Exit:</span> Prov Hwy. 401, Exit 230</div>
+                        <div><span class="label">Phone:</span> (519) 421-3144</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA601</div>
+                        <div><span class="label">Fax:</span> (519) 421-5223</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="colorado">
+            <div class="state-header">
+                <span>📍 COLORADO</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#148 TA Commerce City</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 5101 Quebec Street</div>
+                        <div><span class="label">Location:</span> Commerce City, CO 80022</div>
+                        <div><span class="label">Exit:</span> I-70/I-270, Exit 278</div>
+                        <div><span class="label">Phone:</span> (303) 286-0123</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA148</div>
+                        <div><span class="label">Fax:</span> (303) 286-6781</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#174 TA Wheat Ridge</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 12151 West 44th Avenue</div>
+                        <div><span class="label">Location:</span> Wheat Ridge, CO 80033</div>
+                        <div><span class="label">Exit:</span> I-70, Exit 266</div>
+                        <div><span class="label">Phone:</span> (303) 423-8250</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA174</div>
+                        <div><span class="label">Fax:</span> (303) 420-4694</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="connecticut">
+            <div class="state-header">
+                <span>📍 CONNECTICUT</span>
+                <span>1 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#171 TA New Haven</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 3 East Industrial Road</div>
+                        <div><span class="label">Location:</span> Branford, CT 06405</div>
+                        <div><span class="label">Exit:</span> I-95, Exit 56</div>
+                        <div><span class="label">Phone:</span> (203) 481-0301</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA171</div>
+                        <div><span class="label">Fax:</span> (203) 871-5000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section no-stations" data-state="delaware">
+            <div class="state-header no-stations">
+                <span>❌ DELAWARE</span>
+                <span>0 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="no-stations-message">
+                    <h3>❌ No Covenant Fuel Stations Available</h3>
+                    <p>There are currently no fuel stations in DELAWARE</p>
+                    <div class="suggested-states">
+                        <span class="suggested-state">Try nearby states:</span><span class="suggested-state">PENNSYLVANIA</span><span class="suggested-state">MARYLAND</span><span class="suggested-state">NEW JERSEY</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="florida">
+            <div class="state-header">
+                <span>📍 FLORIDA</span>
+                <span>6 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#247 TA Baldwin</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1024 US 301 South</div>
+                        <div><span class="label">Location:</span> Baldwin, FL 32234</div>
+                        <div><span class="label">Exit:</span> I-10, Exit 343</div>
+                        <div><span class="label">Phone:</span> (904) 266-4281</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA247</div>
+                        <div><span class="label">Fax:</span> (904) 266-9614</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#248 TA Jacksonville South</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> Jacksonville South</div>
+                        <div><span class="label">Location:</span> 1650 C.R. 210 West</div>
+                        <div><span class="label">Exit:</span> Jacksonville, FL 32259</div>
+                        <div><span class="label">Phone:</span> (904) 829-3946</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA248</div>
+                        <div><span class="label">Fax:</span> (904) 824-4115</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#178 TA Marianna</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2112 Highway 71 South</div>
+                        <div><span class="label">Location:</span> Marianna, FL 32448</div>
+                        <div><span class="label">Exit:</span> I-10, Exit 142</div>
+                        <div><span class="label">Phone:</span> (850) 526-3303</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA178</div>
+                        <div><span class="label">Fax:</span> (850) 482-8953</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#158 TA Tampa*</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 11706 Tampa Gateway Blvd.</div>
+                        <div><span class="label">Location:</span> Seffner, FL 33584</div>
+                        <div><span class="label">Exit:</span> I-4, Exit 10</div>
+                        <div><span class="label">Phone:</span> (813) 262-1560</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA158</div>
+                        <div><span class="label">Fax:</span> (813) 262-1550</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#197 TA Vero Beach</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 8909 20th Street</div>
+                        <div><span class="label">Location:</span> Vero Beach, FL 39266</div>
+                        <div><span class="label">Exit:</span> I-95, Exit 147</div>
+                        <div><span class="label">Phone:</span> (772) 562-1791</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA197</div>
+                        <div><span class="label">Fax:</span> (772) 569-0433</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#053 TA Wildwood</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 556 E. State Route 44</div>
+                        <div><span class="label">Location:</span> Wildwood, FL 34785</div>
+                        <div><span class="label">Exit:</span> I-75, Exit 329</div>
+                        <div><span class="label">Phone:</span> (352) 748-2501</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA053</div>
+                        <div><span class="label">Fax:</span> (352) 748-2390</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="georgia">
+            <div class="state-header">
+                <span>📍 GEORGIA</span>
+                <span>4 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#045 TA Madison</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2021 Eatonton Rd.</div>
+                        <div><span class="label">Location:</span> Madison, GA 30650</div>
+                        <div><span class="label">Exit:</span> I-20/US441, Exit 114</div>
+                        <div><span class="label">Phone:</span> (706) 342-4176</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA045</div>
+                        <div><span class="label">Fax:</span> (706) 342-2390</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#146 TA Cartersville</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1981 Cassville-White Road</div>
+                        <div><span class="label">Location:</span> Cartersville, GA 30121</div>
+                        <div><span class="label">Exit:</span> I-75, Exit 296</div>
+                        <div><span class="label">Phone:</span> (770) 607-8885</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA146</div>
+                        <div><span class="label">Fax:</span> (770) 607-7265</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#156 TA Commerce</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 30732 Hwy 441 South</div>
+                        <div><span class="label">Location:</span> Commerce, GA 30529</div>
+                        <div><span class="label">Exit:</span> I-85/US441, Exit 149</div>
+                        <div><span class="label">Phone:</span> (706) 335-5198</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA156</div>
+                        <div><span class="label">Fax:</span> (706) 335-6729</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#268 TA Atlanta South</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 122 Truckstop Way</div>
+                        <div><span class="label">Location:</span> Jackson, GA 30233</div>
+                        <div><span class="label">Exit:</span> I-75/Hwy 36, Exit 201</div>
+                        <div><span class="label">Phone:</span> (770) 775-2076</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA268</div>
+                        <div><span class="label">Fax:</span> (770) 775-2807</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section no-stations" data-state="hawaii">
+            <div class="state-header no-stations">
+                <span>❌ HAWAII</span>
+                <span>0 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="no-stations-message">
+                    <h3>❌ No Covenant Fuel Stations Available</h3>
+                    <p>There are currently no fuel stations in HAWAII</p>
+                    <div class="suggested-states">
+                        <span class="suggested-state">Try nearby states:</span><span class="suggested-state">CALIFORNIA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="idaho">
+            <div class="state-header">
+                <span>📍 IDAHO</span>
+                <span>1 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#167 TA Boise</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 4115  Broadway</div>
+                        <div><span class="label">Location:</span> Boise, ID 83705</div>
+                        <div><span class="label">Exit:</span> I-84, Exit 54</div>
+                        <div><span class="label">Phone:</span> (208) 344-1091</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA167</div>
+                        <div><span class="label">Fax:</span> (208) 345-7560</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="illinois">
+            <div class="state-header">
+                <span>📍 ILLINOIS</span>
+                <span>8 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#092 TA Bloomington</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 505 Truckers Lane</div>
+                        <div><span class="label">Location:</span> Bloomington, IL 61701</div>
+                        <div><span class="label">Exit:</span> I-55/I-74/I-39, Exit 160</div>
+                        <div><span class="label">Phone:</span> (309) 827-4676</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA092</div>
+                        <div><span class="label">Fax:</span> (309) 828-6651</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#030 TA Chicago North</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 16650 W. Russell Road</div>
+                        <div><span class="label">Location:</span> Zion, IL 60099</div>
+                        <div><span class="label">Exit:</span> I-94, Exit 1/1A</div>
+                        <div><span class="label">Phone:</span> (847) 395-5580</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA030</div>
+                        <div><span class="label">Fax:</span> (847) 395-5987</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#035 TA Effingham</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1702 West Evergreen</div>
+                        <div><span class="label">Location:</span> Effingham, IL 62401</div>
+                        <div><span class="label">Exit:</span> I-57/I-70, Exit 160</div>
+                        <div><span class="label">Phone:</span> (217) 347-7183</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA035</div>
+                        <div><span class="label">Fax:</span> (217) 342-4029</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#321 Petro Effingham</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1805 West Fayette Avenue</div>
+                        <div><span class="label">Location:</span> Effingham, IL 62401</div>
+                        <div><span class="label">Exit:</span> I-70/I-57, Exit 159</div>
+                        <div><span class="label">Phone:</span> (217) 347-0480</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE321</div>
+                        <div><span class="label">Fax:</span> (217) 540-2939</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#044 TA Elgin</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 19 N 430 US Highway 20</div>
+                        <div><span class="label">Location:</span> Hampshire, IL 60140</div>
+                        <div><span class="label">Exit:</span> I-90, Exit 42</div>
+                        <div><span class="label">Phone:</span> (847) 683-4550</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA044</div>
+                        <div><span class="label">Fax:</span> (847) 683-7542</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#236 TA Morris</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 21 Romines Drive</div>
+                        <div><span class="label">Location:</span> Morris, IL 60450</div>
+                        <div><span class="label">Exit:</span> I-80, Exit 112B</div>
+                        <div><span class="label">Phone:</span> (815) 942-5690</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA236</div>
+                        <div><span class="label">Fax:</span> (815) 942-4371</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#043 TA Mt. Vernon</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 4510 Broadway</div>
+                        <div><span class="label">Location:</span> Mt. Vernon, IL 62864</div>
+                        <div><span class="label">Exit:</span> I-57/I-64, MM95</div>
+                        <div><span class="label">Phone:</span> (618) 244-4242</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA043</div>
+                        <div><span class="label">Fax:</span> (618) 244-9182</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#199 TA Troy</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 819 Edwardsville Road</div>
+                        <div><span class="label">Location:</span> Troy, IL 62294</div>
+                        <div><span class="label">Exit:</span> I-55/I-70, Exit 18</div>
+                        <div><span class="label">Phone:</span> (618) 667-9931</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA199</div>
+                        <div><span class="label">Fax:</span> (618) 667-8051</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="indiana">
+            <div class="state-header">
+                <span>📍 INDIANA</span>
+                <span>5 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#010 TA Gary</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2510 Burr St.</div>
+                        <div><span class="label">Location:</span> Gary, IN 46406</div>
+                        <div><span class="label">Exit:</span> I-80/ I-94, Exit 6</div>
+                        <div><span class="label">Phone:</span> (219) 845-3721</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA010</div>
+                        <div><span class="label">Fax:</span> (219) 844-0937</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#065 TA Seymour</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2636 E. Tipton St.</div>
+                        <div><span class="label">Location:</span> Seymour, IN 47274</div>
+                        <div><span class="label">Exit:</span> I-65/SR 50, Exit 50</div>
+                        <div><span class="label">Phone:</span> (812) 522-6622</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA065</div>
+                        <div><span class="label">Fax:</span> (812) 523-6699</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#241 TA DeMotte</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 11166 W. State Road 10</div>
+                        <div><span class="label">Location:</span> DeMotte, IN 46310</div>
+                        <div><span class="label">Exit:</span> I-65, Exit 230</div>
+                        <div><span class="label">Phone:</span> (219) 987-7520</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA241</div>
+                        <div><span class="label">Fax:</span> (219) 987-7692</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#380 Petro Gaston</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 14000 W. 28 State Road</div>
+                        <div><span class="label">Location:</span> Gaston, IN 47342</div>
+                        <div><span class="label">Exit:</span> I-69, Exit 245</div>
+                        <div><span class="label">Phone:</span> (765) 358-3326</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE380</div>
+                        <div><span class="label">Fax:</span> (765) 358-0207</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#173 TA Whitestown</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 5930 East State Road 334</div>
+                        <div><span class="label">Location:</span> Whitestown, IN 46075</div>
+                        <div><span class="label">Exit:</span> I-65, Exit 130</div>
+                        <div><span class="label">Phone:</span> (317) 769-3291</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA173</div>
+                        <div><span class="label">Fax:</span> (317) 769-6899</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="iowa">
+            <div class="state-header">
+                <span>📍 IOWA</span>
+                <span>1 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#066 TA Council Bluffs</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 3210 South Seven Street</div>
+                        <div><span class="label">Location:</span> Council Bluffs, IA 51501</div>
+                        <div><span class="label">Exit:</span> I-80 & I-29, Exit 3</div>
+                        <div><span class="label">Phone:</span> (712) 366-2217</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA066</div>
+                        <div><span class="label">Fax:</span> (712) 366-6939</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="kansas">
+            <div class="state-header">
+                <span>📍 KANSAS</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#252 TA Beto Junction</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2775 Highway 75</div>
+                        <div><span class="label">Location:</span> Lebo, KS 66856</div>
+                        <div><span class="label">Exit:</span> U.S. 75 & I-35, Exit 155</div>
+                        <div><span class="label">Phone:</span> (620) 256-6311</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA252</div>
+                        <div><span class="label">Fax:</span> (620) 256-6107</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#366 Petro Salina</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2125 North 9th Street</div>
+                        <div><span class="label">Location:</span> Salina, KS 67401</div>
+                        <div><span class="label">Exit:</span> I-70, Exit 252</div>
+                        <div><span class="label">Phone:</span> (785) 825-7723</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE366</div>
+                        <div><span class="label">Fax:</span> (785) 827-8992</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="kentucky">
+            <div class="state-header">
+                <span>📍 KENTUCKY</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#093 TA Florence</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 7777 Burlington Pike</div>
+                        <div><span class="label">Location:</span> Florence, KY 41042</div>
+                        <div><span class="label">Exit:</span> I-75, Exit 181</div>
+                        <div><span class="label">Phone:</span> (859) 371-7166</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA093</div>
+                        <div><span class="label">Fax:</span> (859) 283-5743</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#330 Petro Glendale</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 554 W. Glendale</div>
+                        <div><span class="label">Location:</span> Glendale, KY 42740</div>
+                        <div><span class="label">Exit:</span> I-65, Exit 86</div>
+                        <div><span class="label">Phone:</span> (270) 369-6840</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE330</div>
+                        <div><span class="label">Fax:</span> (270) 369-6848</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="louisiana">
+            <div class="state-header">
+                <span>📍 LOUISIANA</span>
+                <span>4 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#310 Petro Hammond</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2100 S.W. Railroad Avenue</div>
+                        <div><span class="label">Location:</span> Hammond, LA 70403</div>
+                        <div><span class="label">Exit:</span> I-12, Exit 40</div>
+                        <div><span class="label">Phone:</span> (985) 542-4981</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE310</div>
+                        <div><span class="label">Fax:</span> (985) 429-5908</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#237 TA Greenwood</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 8560 Greenwood Road</div>
+                        <div><span class="label">Location:</span> Greenwood, LA 71033</div>
+                        <div><span class="label">Exit:</span> I-20, Exit 5</div>
+                        <div><span class="label">Phone:</span> (318) 938-5411</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA237</div>
+                        <div><span class="label">Fax:</span> (318) 938-5003</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#161 TA Lafayette</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1701 North University Avenue</div>
+                        <div><span class="label">Location:</span> Lafayette, LA 70507</div>
+                        <div><span class="label">Exit:</span> I-10, Exit 101</div>
+                        <div><span class="label">Phone:</span> (337) 237-0176</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA161</div>
+                        <div><span class="label">Fax:</span> (337) 235-1713</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#180 TA Slidell</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1682 Gause Boulevard</div>
+                        <div><span class="label">Location:</span> Slidell, LA 70458</div>
+                        <div><span class="label">Exit:</span> I-10, Exit 266</div>
+                        <div><span class="label">Phone:</span> (985) 643-9974</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA180</div>
+                        <div><span class="label">Fax:</span> (985) 649-1676</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section no-stations" data-state="maine">
+            <div class="state-header no-stations">
+                <span>❌ MAINE</span>
+                <span>0 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="no-stations-message">
+                    <h3>❌ No Covenant Fuel Stations Available</h3>
+                    <p>There are currently no fuel stations in MAINE</p>
+                    <div class="suggested-states">
+                        <span class="suggested-state">Try nearby states:</span><span class="suggested-state">NEW HAMPSHIRE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="maryland">
+            <div class="state-header">
+                <span>📍 MARYLAND</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#216 TA Baltimore*</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 5501 O’Donnell Street Cutoff</div>
+                        <div><span class="label">Location:</span> Baltimore, MD 21224</div>
+                        <div><span class="label">Exit:</span> I-95, Exit 57</div>
+                        <div><span class="label">Phone:</span> (410) 633-4611</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA216</div>
+                        <div><span class="label">Fax:</span> (410) 633-4613</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#151 TA Baltimore South*</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> Baltimore South*</div>
+                        <div><span class="label">Location:</span> 7401 Assateague Drive</div>
+                        <div><span class="label">Exit:</span> Jessup, MD 20794</div>
+                        <div><span class="label">Phone:</span> (410) 799-3835</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA151</div>
+                        <div><span class="label">Fax:</span> (410) 799-7736</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section no-stations" data-state="massachusetts">
+            <div class="state-header no-stations">
+                <span>❌ MASSACHUSETTS</span>
+                <span>0 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="no-stations-message">
+                    <h3>❌ No Covenant Fuel Stations Available</h3>
+                    <p>There are currently no fuel stations in MASSACHUSETTS</p>
+                    <div class="suggested-states">
+                        <span class="suggested-state">Try nearby states:</span><span class="suggested-state">CONNECTICUT</span><span class="suggested-state">NEW HAMPSHIRE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="michigan">
+            <div class="state-header">
+                <span>📍 MICHIGAN</span>
+                <span>5 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#089 TA Ann Arbor</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 200 Baker Road</div>
+                        <div><span class="label">Location:</span> Dexter, MI 48130</div>
+                        <div><span class="label">Exit:</span> I-94, Exit 167</div>
+                        <div><span class="label">Phone:</span> (734) 426-3951</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA089</div>
+                        <div><span class="label">Fax:</span> (734) 426-8558</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#069 TA Monroe</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1255 N Dixie Highway</div>
+                        <div><span class="label">Location:</span> Monroe, MI 48162</div>
+                        <div><span class="label">Exit:</span> I-75, Exit 15</div>
+                        <div><span class="label">Phone:</span> (734) 384-7952</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA069</div>
+                        <div><span class="label">Fax:</span> (734) 240-0453</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#198 TA Saginaw</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 6364 Dixie Highway</div>
+                        <div><span class="label">Location:</span> Bridgeport, MI 48722</div>
+                        <div><span class="label">Exit:</span> I-75, Exit 144</div>
+                        <div><span class="label">Phone:</span> (989) 777-7650</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA198</div>
+                        <div><span class="label">Fax:</span> (989) 777-9770</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#116 TA Sawyer</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 6100 Sawyer Road</div>
+                        <div><span class="label">Location:</span> Sawyer, MI 49125</div>
+                        <div><span class="label">Exit:</span> I-94, Exit 12</div>
+                        <div><span class="label">Phone:</span> (269) 426-4884</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA116</div>
+                        <div><span class="label">Fax:</span> (269) 426-3719</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#243 TA Tekonsha</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 15587 M-60</div>
+                        <div><span class="label">Location:</span> Tekonsha, MI 49092</div>
+                        <div><span class="label">Exit:</span> I-69, Exit 25</div>
+                        <div><span class="label">Phone:</span> (517) 767-4135</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA243</div>
+                        <div><span class="label">Fax:</span> (517) 767-3430</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="minnesota">
+            <div class="state-header">
+                <span>📍 MINNESOTA</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#398 Petro Albert Lea</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 820 Happy Trails Lane</div>
+                        <div><span class="label">Location:</span> Albert Lea, MN 56007</div>
+                        <div><span class="label">Exit:</span> I-90/I-35, Exit 11</div>
+                        <div><span class="label">Phone:</span> (507) 373-4200</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE398</div>
+                        <div><span class="label">Fax:</span> (507) 379-2646</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#190 TA Rogers</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 13400 Rogers Drive</div>
+                        <div><span class="label">Location:</span> Rogers, MN 55374</div>
+                        <div><span class="label">Exit:</span> I-94, Exit 207</div>
+                        <div><span class="label">Phone:</span> (763) 428-2277</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA190</div>
+                        <div><span class="label">Fax:</span> (763) 428-2007</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="mississippi">
+            <div class="state-header">
+                <span>📍 MISSISSIPPI</span>
+                <span>1 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#328 Petro Jackson</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 970 I-20 W. Frontage Road</div>
+                        <div><span class="label">Location:</span> Jackson, MS 39201</div>
+                        <div><span class="label">Exit:</span> I-20 & I-55, Exit 45/45A</div>
+                        <div><span class="label">Phone:</span> (601) 292-0940</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE328</div>
+                        <div><span class="label">Fax:</span> (601) 292-0947</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="missouri">
+            <div class="state-header">
+                <span>📍 MISSOURI</span>
+                <span>3 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#354 Petro Joplin</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 4240 Highway 43</div>
+                        <div><span class="label">Location:</span> Joplin, MO 64804</div>
+                        <div><span class="label">Exit:</span> I-44, Exit 4</div>
+                        <div><span class="label">Phone:</span> (417) 624-3400</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE354</div>
+                        <div><span class="label">Fax:</span> (417) 673-0759</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#460 Petro Oak Grove</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 301 SW First Street</div>
+                        <div><span class="label">Location:</span> Oak Grove, MO 64075</div>
+                        <div><span class="label">Exit:</span> I-70, Exit 28</div>
+                        <div><span class="label">Phone:</span> (816) 690-4455</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE370</div>
+                        <div><span class="label">Fax:</span> (816) 690-3409</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#052 TA Oak Grove</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 100 North Broadway</div>
+                        <div><span class="label">Location:</span> Oak Grove, MO 64075</div>
+                        <div><span class="label">Exit:</span> I-70, Exit 28</div>
+                        <div><span class="label">Phone:</span> (816) 690-4115</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA052</div>
+                        <div><span class="label">Fax:</span> (816) 625-4555</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="montana">
+            <div class="state-header">
+                <span>📍 MONTANA</span>
+                <span>1 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#261 TA Laurel</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 11360 South Frontage Road</div>
+                        <div><span class="label">Location:</span> Laurel, MT 59044</div>
+                        <div><span class="label">Exit:</span> I-90, Exit 437</div>
+                        <div><span class="label">Phone:</span> (406) 628-4324</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA261</div>
+                        <div><span class="label">Fax:</span> (406) 628-8442</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="nebraska">
+            <div class="state-header">
+                <span>📍 NEBRASKA</span>
+                <span>1 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#193 TA Grand Island</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 8033 West Holling Road</div>
+                        <div><span class="label">Location:</span> Alda, NE 68810</div>
+                        <div><span class="label">Exit:</span> I-80, Exit 305</div>
+                        <div><span class="label">Phone:</span> (308) 382-5902</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA193</div>
+                        <div><span class="label">Fax:</span> (308) 382-1229</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="nevada">
+            <div class="state-header">
+                <span>📍 NEVADA</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#108 TA Las Vegas</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 8050 Dean Martin Drive</div>
+                        <div><span class="label">Location:</span> Las Vegas, NV 89139</div>
+                        <div><span class="label">Exit:</span> I-15, Exit 33</div>
+                        <div><span class="label">Phone:</span> (702) 361-1176</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA108</div>
+                        <div><span class="label">Fax:</span> (702) 361-6349</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#181 TA Mill City</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 6000 E. Frontage Road</div>
+                        <div><span class="label">Location:</span> Mill City, NV 89418</div>
+                        <div><span class="label">Exit:</span> I-80, Exit 151(W)/149(E)</div>
+                        <div><span class="label">Phone:</span> (775) 538-7311</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA181</div>
+                        <div><span class="label">Fax:</span> (775) 538-7319</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="new hampshire">
+            <div class="state-header">
+                <span>📍 NEW HAMPSHIRE</span>
+                <span>1 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#211 TA Greenland</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 108 Ocean Road</div>
+                        <div><span class="label">Location:</span> Greenland, NH 03840</div>
+                        <div><span class="label">Exit:</span> I-95, Exit 3(N), 3B(S)</div>
+                        <div><span class="label">Phone:</span> (603) 436-3636</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA211</div>
+                        <div><span class="label">Fax:</span> (603) 436-1575</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="new jersey">
+            <div class="state-header">
+                <span>📍 NEW JERSEY</span>
+                <span>4 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#048 TA Bloomsburry</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 975 S.R. 173</div>
+                        <div><span class="label">Location:</span> Bloomsbury, NJ 08804</div>
+                        <div><span class="label">Exit:</span> I-78, Exit 7</div>
+                        <div><span class="label">Phone:</span> (908) 479-4136</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA048</div>
+                        <div><span class="label">Fax:</span> (908) 479-4533</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#314 Petro Bordentown*</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 402 Rising Sun Square Road</div>
+                        <div><span class="label">Location:</span> Bordentown, NJ 08505</div>
+                        <div><span class="label">Exit:</span> I-295, Exit 57/Tpike, Exit 7</div>
+                        <div><span class="label">Phone:</span> (609) 298-6070</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE314</div>
+                        <div><span class="label">Fax:</span> (609) 227-5033</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#006 TA Columbia</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2 Simpson Road</div>
+                        <div><span class="label">Location:</span> Columbia, NJ 07832</div>
+                        <div><span class="label">Exit:</span> I-80, Exit 4A</div>
+                        <div><span class="label">Phone:</span> (908) 496-4124</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA006</div>
+                        <div><span class="label">Fax:</span> (908) 496-4809</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#218 TA Paulsboro</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 171 Berkley Road</div>
+                        <div><span class="label">Location:</span> Paulsboro, NJ 08066</div>
+                        <div><span class="label">Exit:</span> I-295, Exit 18</div>
+                        <div><span class="label">Phone:</span> (856) 423-5500</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA218</div>
+                        <div><span class="label">Fax:</span> (856) 423-6261</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="new mexico">
+            <div class="state-header">
+                <span>📍 NEW MEXICO</span>
+                <span>1 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#229 TA Moriarty</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1700 U.S. Route 66 West</div>
+                        <div><span class="label">Location:</span> Moriarty, NM 87035</div>
+                        <div><span class="label">Exit:</span> I-40, Exit 194</div>
+                        <div><span class="label">Phone:</span> (505) 832-4421</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA229</div>
+                        <div><span class="label">Fax:</span> (505) 832-6643</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="new york">
+            <div class="state-header">
+                <span>📍 NEW YORK</span>
+                <span>5 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#207 TA Binghamton</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 753 Upper Court Street</div>
+                        <div><span class="label">Location:</span> Binghamton, NY 13904</div>
+                        <div><span class="label">Exit:</span> I-81 N, Exit 2W</div>
+                        <div><span class="label">Phone:</span> (607) 775-3500</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA207</div>
+                        <div><span class="label">Fax:</span> (607) 775-1528</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#208 TA Dansville</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 9616 Commerce Drive</div>
+                        <div><span class="label">Location:</span> Dansville, NY 14437</div>
+                        <div><span class="label">Exit:</span> I-390, Exit 5</div>
+                        <div><span class="label">Phone:</span> (585) 335-6023</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA208</div>
+                        <div><span class="label">Fax:</span> (585) 335-2090</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#209 TA Fultonville</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 40 Riverside Drive</div>
+                        <div><span class="label">Location:</span> Fultonville, NY 12072</div>
+                        <div><span class="label">Exit:</span> I-90, Exit 28</div>
+                        <div><span class="label">Phone:</span> (518) 853-3411</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA209</div>
+                        <div><span class="label">Fax:</span> (518) 853-4523</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#210 TA Maybrook</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 125 Neelytown Road</div>
+                        <div><span class="label">Location:</span> Montgomery, NY 12549</div>
+                        <div><span class="label">Exit:</span> I-84, Exit 5</div>
+                        <div><span class="label">Phone:</span> (845) 457-3163</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA210</div>
+                        <div><span class="label">Fax:</span> (845) 457-3492</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#194 TA Pembroke</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 8420 Alleghany</div>
+                        <div><span class="label">Location:</span> Corfu, NY 14036</div>
+                        <div><span class="label">Exit:</span> I-90, Exit 48A</div>
+                        <div><span class="label">Phone:</span> (585) 599-4577</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA194</div>
+                        <div><span class="label">Fax:</span> (585) 599-3456</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="north carolina">
+            <div class="state-header">
+                <span>📍 NORTH CAROLINA</span>
+                <span>4 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#221 TA Candler</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 153 Wiggins Road</div>
+                        <div><span class="label">Location:</span> Candler, NC 28715</div>
+                        <div><span class="label">Exit:</span> I-40, Exit 37</div>
+                        <div><span class="label">Phone:</span> (828) 665-1156</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA221</div>
+                        <div><span class="label">Fax:</span> (828) 665-0890</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#002 TA Greensboro</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1101 NC Highway 61</div>
+                        <div><span class="label">Location:</span> Whitsett, NC 27377</div>
+                        <div><span class="label">Exit:</span> I-85/I-40, Exit 138</div>
+                        <div><span class="label">Phone:</span> (336) 449-6060</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA002</div>
+                        <div><span class="label">Fax:</span> (336) 449-0301</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#395 Petro Kenly</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 923 Johnston Parkway</div>
+                        <div><span class="label">Location:</span> Kenly, NC 27542</div>
+                        <div><span class="label">Exit:</span> I-95, Exit 106</div>
+                        <div><span class="label">Phone:</span> (919) 284-5121</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE395</div>
+                        <div><span class="label">Fax:</span> (919) 284-5092</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#251 TA Mocksville</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1670 U.S. Highway 601 North</div>
+                        <div><span class="label">Location:</span> Mocksville, NC 27028</div>
+                        <div><span class="label">Exit:</span> I-40, Exit 170</div>
+                        <div><span class="label">Phone:</span> (336) 751-3815</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA251</div>
+                        <div><span class="label">Fax:</span> (336) 751-4994</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section no-stations" data-state="north dakota">
+            <div class="state-header no-stations">
+                <span>❌ NORTH DAKOTA</span>
+                <span>0 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="no-stations-message">
+                    <h3>❌ No Covenant Fuel Stations Available</h3>
+                    <p>There are currently no fuel stations in NORTH DAKOTA</p>
+                    <div class="suggested-states">
+                        <span class="suggested-state">Try nearby states:</span><span class="suggested-state">MINNESOTA</span><span class="suggested-state">MONTANA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="ohio">
+            <div class="state-header">
+                <span>📍 OHIO</span>
+                <span>6 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#015 TA Lodi</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 8834 Lake Road</div>
+                        <div><span class="label">Location:</span> NSeville, OH 44273</div>
+                        <div><span class="label">Exit:</span> I-71/I-76, Exit 209</div>
+                        <div><span class="label">Phone:</span> (330) 769-2053</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA015</div>
+                        <div><span class="label">Fax:</span> (330) 769-4609</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#024 TA London</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 940 US RT 42 NE</div>
+                        <div><span class="label">Location:</span> London, OH 43140</div>
+                        <div><span class="label">Exit:</span> I-70/US 42, Exit 79</div>
+                        <div><span class="label">Phone:</span> (740) 852-3810</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA024</div>
+                        <div><span class="label">Fax:</span> (740) 845-1240</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#095 TA North Canton</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 4450 Portage Street NW</div>
+                        <div><span class="label">Location:</span> North Canton, OH 44720</div>
+                        <div><span class="label">Exit:</span> I-77, Exit 111</div>
+                        <div><span class="label">Phone:</span> (330) 494-7507</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA095</div>
+                        <div><span class="label">Fax:</span> (330) 494-7911</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#139 TA Jeffersonville</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 12403 US Route 35 NW</div>
+                        <div><span class="label">Location:</span> Jeffersonville, OH 43128</div>
+                        <div><span class="label">Exit:</span> I-71, Exit 65</div>
+                        <div><span class="label">Phone:</span> (740) 948-2365</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA139</div>
+                        <div><span class="label">Fax:</span> (740) 948-2564</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#058 TA Youngstown</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 5400 Seventy Six Drive</div>
+                        <div><span class="label">Location:</span> Youngstown, OH 44515</div>
+                        <div><span class="label">Exit:</span> I-80, Exit 223A</div>
+                        <div><span class="label">Phone:</span> (330) 793-4426</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA058</div>
+                        <div><span class="label">Fax:</span> (330) 793-7889</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#325 Petro North Baltimore</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> North Baltimore</div>
+                        <div><span class="label">Location:</span> 12906 Deshler Road</div>
+                        <div><span class="label">Exit:</span> North Baltimore, OH 45872</div>
+                        <div><span class="label">Phone:</span> (419) 257-3744</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE325</div>
+                        <div><span class="label">Fax:</span> (419) 257-5128</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="oklahoma">
+            <div class="state-header">
+                <span>📍 OKLAHOMA</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#036 TA Oklahoma City East</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> Oklahoma City East</div>
+                        <div><span class="label">Location:</span> 801 South Council Road</div>
+                        <div><span class="label">Exit:</span> Oklahoma City, OK 73128</div>
+                        <div><span class="label">Phone:</span> (405) 787-7411</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA036</div>
+                        <div><span class="label">Fax:</span> (405) 789-2561</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#316 Petro Oklahoma City</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> Oklahoma City</div>
+                        <div><span class="label">Location:</span> 20 Martin Luther King Blvd.</div>
+                        <div><span class="label">Exit:</span> Oklahoma City, OK 73117</div>
+                        <div><span class="label">Phone:</span> (405) 228-7040</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA316</div>
+                        <div><span class="label">Fax:</span> (405) 228-7047</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="oregon">
+            <div class="state-header">
+                <span>📍 OREGON</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#056 TA Aurora</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 21856 Bents Road NE</div>
+                        <div><span class="label">Location:</span> Aurora, OR 97002</div>
+                        <div><span class="label">Exit:</span> I-5, Exit 278</div>
+                        <div><span class="label">Phone:</span> (503) 678-2111</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-056</div>
+                        <div><span class="label">Fax:</span> (503) 678-2571</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#183 TA Troutdale</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 790 N W Frontage Road</div>
+                        <div><span class="label">Location:</span> Troutdale, OR 97060</div>
+                        <div><span class="label">Exit:</span> I-84, Exit 17</div>
+                        <div><span class="label">Phone:</span> (503) 666-1588</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA183</div>
+                        <div><span class="label">Fax:</span> (506) 665-3746</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="pennsylvania">
+            <div class="state-header">
+                <span>📍 PENNSYLVANIA</span>
+                <span>6 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#212 TA Bloomsburg</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 6 Buckhorn Road</div>
+                        <div><span class="label">Location:</span> Bloomsburg, PA 17815</div>
+                        <div><span class="label">Exit:</span> I-80, Exit 232</div>
+                        <div><span class="label">Phone:</span> (570) 784-9400</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA212</div>
+                        <div><span class="label">Fax:</span> (570) 784-9441</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#003 TA Brookville</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 245 Allegheny Boulevard</div>
+                        <div><span class="label">Location:</span> Brookville, PA 15825</div>
+                        <div><span class="label">Exit:</span> I-80, Exit 78</div>
+                        <div><span class="label">Phone:</span> (814) 849-3051</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA003</div>
+                        <div><span class="label">Fax:</span> (814) 849-5259</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#336 Petro Carlisle</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1201 Harrisburg Ave, Route 11</div>
+                        <div><span class="label">Location:</span> Carlisle, PA 17013</div>
+                        <div><span class="label">Exit:</span> I-81, Exit 52 / I-76, Exit 226</div>
+                        <div><span class="label">Phone:</span> (717) 249-1919</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE336</div>
+                        <div><span class="label">Fax:</span> (717) 258-2339</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#213 TA Greencastle</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 10835 John Wayne Drive</div>
+                        <div><span class="label">Location:</span> Greencastle, PA 17225</div>
+                        <div><span class="label">Exit:</span> I-81, Exit 5</div>
+                        <div><span class="label">Phone:</span> (717) 597-7762</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA213</div>
+                        <div><span class="label">Fax:</span> (717) 597-3506</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#215 TA Harborcreek</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 4050 Depot Road</div>
+                        <div><span class="label">Location:</span> Erie, PA 16510</div>
+                        <div><span class="label">Exit:</span> I-90, Exit 35</div>
+                        <div><span class="label">Phone:</span> (814) 899-1919</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA215</div>
+                        <div><span class="label">Fax:</span> (814) 899-7918</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#012 TA Harrisburg</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 7848 Linglestown Road</div>
+                        <div><span class="label">Location:</span> Harrisburg, PA 17112</div>
+                        <div><span class="label">Exit:</span> I-81, Exit 77</div>
+                        <div><span class="label">Phone:</span> (717) 652-4556</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA012</div>
+                        <div><span class="label">Fax:</span> (717) 657-5012</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section no-stations" data-state="rhode island">
+            <div class="state-header no-stations">
+                <span>❌ RHODE ISLAND</span>
+                <span>0 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="no-stations-message">
+                    <h3>❌ No Covenant Fuel Stations Available</h3>
+                    <p>There are currently no fuel stations in RHODE ISLAND</p>
+                    <div class="suggested-states">
+                        <span class="suggested-state">Try nearby states:</span><span class="suggested-state">CONNECTICUT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="south carolina">
+            <div class="state-header">
+                <span>📍 SOUTH CAROLINA</span>
+                <span>5 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#195 TA Florence</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2301 West Lucas Street</div>
+                        <div><span class="label">Location:</span> Florence, SC 29501</div>
+                        <div><span class="label">Exit:</span> I-95, Exit 164</div>
+                        <div><span class="label">Phone:</span> (843) 292-0386</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA195</div>
+                        <div><span class="label">Fax:</span> (843) 667-6976</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#025 TA Spartanburg</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1402 East Main Street</div>
+                        <div><span class="label">Location:</span> Duncan, SC 29334</div>
+                        <div><span class="label">Exit:</span> I-85, Exit 63</div>
+                        <div><span class="label">Phone:</span> (864) 433-0711</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA025</div>
+                        <div><span class="label">Fax:</span> (864) 433-1495</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#262 TA Columbia</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> North</div>
+                        <div><span class="label">Location:</span> 99 Plumbers Road</div>
+                        <div><span class="label">Exit:</span> Columbia, SC 29203</div>
+                        <div><span class="label">Phone:</span> (803) 786-7680</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA262</div>
+                        <div><span class="label">Fax:</span> (803) 735-8065</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#179 TA Manning</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> Rt 6 Box 200</div>
+                        <div><span class="label">Location:</span> Manning, SC 29102</div>
+                        <div><span class="label">Exit:</span> I-95, SR 261, Exit 119</div>
+                        <div><span class="label">Phone:</span> (803) 473-2568</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA179</div>
+                        <div><span class="label">Fax:</span> (803) 473-2822</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#238 Petro Columbia</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2154 S. Beltline Blvd.</div>
+                        <div><span class="label">Location:</span> Columbia, SC 29201</div>
+                        <div><span class="label">Exit:</span> I-77, Exit 5</div>
+                        <div><span class="label">Phone:</span> (803) 908-4889</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE238</div>
+                        <div><span class="label">Fax:</span> (803) 908-4908</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section no-stations" data-state="south dakota">
+            <div class="state-header no-stations">
+                <span>❌ SOUTH DAKOTA</span>
+                <span>0 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="no-stations-message">
+                    <h3>❌ No Covenant Fuel Stations Available</h3>
+                    <p>There are currently no fuel stations in SOUTH DAKOTA</p>
+                    <div class="suggested-states">
+                        <span class="suggested-state">Try nearby states:</span><span class="suggested-state">MINNESOTA</span><span class="suggested-state">IOWA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="tennessee">
+            <div class="state-header">
+                <span>📍 TENNESSEE</span>
+                <span>5 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#117 TA Antioch</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 13011 Old Hickory Boulevard</div>
+                        <div><span class="label">Location:</span> Antioch, TN 37013</div>
+                        <div><span class="label">Exit:</span> I-24, Exit 62</div>
+                        <div><span class="label">Phone:</span> (615) 641-6731</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA117</div>
+                        <div><span class="label">Fax:</span> (615) 641-3353</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#157 TA Franklin</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 4400 Peytonsville Road</div>
+                        <div><span class="label">Location:</span> Franklin, TN 37064</div>
+                        <div><span class="label">Exit:</span> I-65, Exit 61</div>
+                        <div><span class="label">Phone:</span> (615) 794-8406</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA157</div>
+                        <div><span class="label">Fax:</span> (615) 790-6510</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#034 TA Nashville</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 111 N. First Street</div>
+                        <div><span class="label">Location:</span> Nashville, TN 37213</div>
+                        <div><span class="label">Exit:</span> I-24, Exit 48</div>
+                        <div><span class="label">Phone:</span> (615) 244-3682</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA034</div>
+                        <div><span class="label">Fax:</span> (615) 255-2054</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#255 TA Caryville</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 305 Howard Baker Highway</div>
+                        <div><span class="label">Location:</span> Pioneer, TN 37847</div>
+                        <div><span class="label">Exit:</span> I-75, Exit 141</div>
+                        <div><span class="label">Phone:</span> (423) 562-3490</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA255</div>
+                        <div><span class="label">Fax:</span> (423) 566-3700</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#312 Petro Knoxville</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 722 N. Watt Rd.</div>
+                        <div><span class="label">Location:</span> Knoxville, TN 37922</div>
+                        <div><span class="label">Exit:</span> I-40/I-75, Exit 369</div>
+                        <div><span class="label">Phone:</span> (865) 693-6542</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE312</div>
+                        <div><span class="label">Fax:</span> (865) 560-3730</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="texas">
+            <div class="state-header">
+                <span>📍 TEXAS</span>
+                <span>14 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#055 TA Amarillo</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 7000 E. Interstate 40</div>
+                        <div><span class="label">Location:</span> Amarillo, TX 79118</div>
+                        <div><span class="label">Exit:</span> I-40, Exit 74</div>
+                        <div><span class="label">Phone:</span> (806) 342-3080</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA055</div>
+                        <div><span class="label">Fax:</span> (806) 371-8486</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#017 TA Baytown</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 6800 Thompson Road</div>
+                        <div><span class="label">Location:</span> Baytown, TX 77521</div>
+                        <div><span class="label">Exit:</span> I-10, Exit 789</div>
+                        <div><span class="label">Phone:</span> (281) 424-7772</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA017</div>
+                        <div><span class="label">Fax:</span> (281) 424-3372</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#150 TA Dallas South*</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 7751 Bonnie View Road</div>
+                        <div><span class="label">Location:</span> Dallas, TX 75241</div>
+                        <div><span class="label">Exit:</span> I-20, Exit 472</div>
+                        <div><span class="label">Phone:</span> (469) 941-3150</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA150</div>
+                        <div><span class="label">Fax:</span> (469) 941-3155</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#301 Petro El Paso</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1295 Horizon Boulevard</div>
+                        <div><span class="label">Location:</span> El Paso, TX 79927</div>
+                        <div><span class="label">Exit:</span> I-10, Exit 37</div>
+                        <div><span class="label">Phone:</span> (915) 790-4529</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE301</div>
+                        <div><span class="label">Fax:</span> (915) 790-4524</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#231 TA Ganado</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 802 E. York, Highway 59</div>
+                        <div><span class="label">Location:</span> Ganado, TX 77962</div>
+                        <div><span class="label">Exit:</span> Hwy 59, Exit 522E</div>
+                        <div><span class="label">Phone:</span> (361) 771-3504</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA231</div>
+                        <div><span class="label">Fax:</span> (361) 771-1984</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#340 Petro Carl’s Corner</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> Carl’s Corner</div>
+                        <div><span class="label">Location:</span> 101 Cornelius Road North</div>
+                        <div><span class="label">Exit:</span> Hillsboro, TX 76645</div>
+                        <div><span class="label">Phone:</span> (254) 714-3000</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE340</div>
+                        <div><span class="label">Fax:</span> (254) 714-3001</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#232 TA New Braunfels</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 4817 I-35 North</div>
+                        <div><span class="label">Location:</span> New Braunfels, TX 78130</div>
+                        <div><span class="label">Exit:</span> I-35, Exit 193</div>
+                        <div><span class="label">Phone:</span> (830) 608-9395</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-232</div>
+                        <div><span class="label">Fax:</span> (830) 608-0382</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#147 TA San Antonio</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 6170 I.H.-10 East</div>
+                        <div><span class="label">Location:</span> San Antonio, TX 78219</div>
+                        <div><span class="label">Exit:</span> I-10, Exit 583</div>
+                        <div><span class="label">Phone:</span> (210) 310-0145</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA147</div>
+                        <div><span class="label">Fax:</span> (210) 661-0995</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#233 TA Terrell</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1700 Wilson Road</div>
+                        <div><span class="label">Location:</span> Terrell, TX 75161</div>
+                        <div><span class="label">Exit:</span> I-20, Exit 503</div>
+                        <div><span class="label">Phone:</span> (972) 563-6939</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA233</div>
+                        <div><span class="label">Fax:</span> (972) 563-5862</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#302 Petro Weatherford</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> Weatherford</div>
+                        <div><span class="label">Location:</span> 2001 Santa Fe Dr.</div>
+                        <div><span class="label">Exit:</span> Weatherford, TX 76086</div>
+                        <div><span class="label">Phone:</span> (817) 599-9411</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE302</div>
+                        <div><span class="label">Fax:</span> (817) 598-5524</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#333 TA Hillsboro</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 160 State Hwy 77</div>
+                        <div><span class="label">Location:</span> Hillsboro, TX 76645</div>
+                        <div><span class="label">Exit:</span> I-35, Exit 370</div>
+                        <div><span class="label">Phone:</span> (254) 283-6556</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA333</div>
+                        <div><span class="label">Fax:</span> (254) 283-6968</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#049 TA Rockwall</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 2105 South Goliad St.</div>
+                        <div><span class="label">Location:</span> Rockwall, TX 75087</div>
+                        <div><span class="label">Exit:</span> I-30, Exit 68</div>
+                        <div><span class="label">Phone:</span> (972) 722-7450</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA049</div>
+                        <div><span class="label">Fax:</span> (214) 771-4435</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#235 TA Edinburg</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 8301 N.HWY 281</div>
+                        <div><span class="label">Location:</span> Edinburg, TX 78541</div>
+                        <div><span class="label">Exit:</span> Hwy. 281, Exit FM 2812</div>
+                        <div><span class="label">Phone:</span> (956) 383-0788</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA235</div>
+                        <div><span class="label">Fax:</span> (956) 383-2310</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#266 TA Denton</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 6420 North I-35</div>
+                        <div><span class="label">Location:</span> Denton, TX 76207</div>
+                        <div><span class="label">Exit:</span> I-35 & US 77, Exit 471</div>
+                        <div><span class="label">Phone:</span> (940) 383-1458</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA266</div>
+                        <div><span class="label">Fax:</span> (940) 898-1527</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="utah">
+            <div class="state-header">
+                <span>📍 UTAH</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#186 TA Parowan</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1130 North 100</div>
+                        <div><span class="label">Location:</span> Parowan, UT 84761</div>
+                        <div><span class="label">Exit:</span> I-15, Exit 78</div>
+                        <div><span class="label">Phone:</span> (435) 477-3311</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA186</div>
+                        <div><span class="label">Fax:</span> (435) 477-8713</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#060 TA Tooele</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 8836 Clinton Landing Road</div>
+                        <div><span class="label">Location:</span> Tooele, UT 84074</div>
+                        <div><span class="label">Exit:</span> I-80, Exit 99</div>
+                        <div><span class="label">Phone:</span> (801) 250-8585</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA060</div>
+                        <div><span class="label">Fax:</span> (801) 252-2224</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section no-stations" data-state="vermont">
+            <div class="state-header no-stations">
+                <span>❌ VERMONT</span>
+                <span>0 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="no-stations-message">
+                    <h3>❌ No Covenant Fuel Stations Available</h3>
+                    <p>There are currently no fuel stations in VERMONT</p>
+                    <div class="suggested-states">
+                        <span class="suggested-state">Try nearby states:</span><span class="suggested-state">NEW HAMPSHIRE</span><span class="suggested-state">NEW YORK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="virginia">
+            <div class="state-header">
+                <span>📍 VIRGINIA</span>
+                <span>3 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#001 TA Ashland</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 100 North Carter Road</div>
+                        <div><span class="label">Location:</span> Ashland, VA 23005</div>
+                        <div><span class="label">Exit:</span> I-95, Exit 92</div>
+                        <div><span class="label">Phone:</span> (804) 798-6011</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA001</div>
+                        <div><span class="label">Fax:</span> (804) 798-7342</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#142 TA Richmond</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 10134 Lewistown Road</div>
+                        <div><span class="label">Location:</span> Ashland, VA 23005</div>
+                        <div><span class="label">Exit:</span> I-95, Exit 89</div>
+                        <div><span class="label">Phone:</span> (804) 798-6021</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA142</div>
+                        <div><span class="label">Fax:</span> (804) 752-6665</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#143 TA Wytheville</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 1025 Peppers Ferry Road</div>
+                        <div><span class="label">Location:</span> Wytheville, VA 24382</div>
+                        <div><span class="label">Exit:</span> I-77, Exit 41/I-81, Exit 72</div>
+                        <div><span class="label">Phone:</span> (276) 228-8676</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA143</div>
+                        <div><span class="label">Fax:</span> (276) 228-8504</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="washington">
+            <div class="state-header">
+                <span>📍 WASHINGTON</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="exclusive">
+                    <div class="station-header">
+                        <div class="station-name">#176 TA Seattle East</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type exclusive">Exclusive</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 46600 S.E. North Bend Way</div>
+                        <div><span class="label">Location:</span> North Bend, WA 98045</div>
+                        <div><span class="label">Exit:</span> 1-90, Exit 34</div>
+                        <div><span class="label">Phone:</span> (425) 888-1119</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA176</div>
+                        <div><span class="label">Fax:</span> (425) 888-9392</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="petro" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#339 Petro Spokane</div>
+                        <div class="brand-badge brand-petro">Petro</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 10506 West Aero Road</div>
+                        <div><span class="label">Location:</span> Spokane, WA 99224</div>
+                        <div><span class="label">Exit:</span> I-90, Exit 272</div>
+                        <div><span class="label">Phone:</span> (509) 842-1100</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-PE339</div>
+                        <div><span class="label">Fax:</span> (509) 842-1105</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="west virginia">
+            <div class="state-header">
+                <span>📍 WEST VIRGINIA</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#149 TA Hurricane</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 4195 State Route 34</div>
+                        <div><span class="label">Location:</span> Hurricane, WV 25526</div>
+                        <div><span class="label">Exit:</span> I-64, Exit 39</div>
+                        <div><span class="label">Phone:</span> (304) 757-7600</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA149</div>
+                        <div><span class="label">Fax:</span> (304) 757-7818</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#032 TA Wheeling</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 196 W. Alexander Road</div>
+                        <div><span class="label">Location:</span> Valley Grove, WV 26060</div>
+                        <div><span class="label">Exit:</span> I-70, Exit 11</div>
+                        <div><span class="label">Phone:</span> (304) 547-1521</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA032</div>
+                        <div><span class="label">Fax:</span> (304) 547-9454</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="wisconsin">
+            <div class="state-header">
+                <span>📍 WISCONSIN</span>
+                <span>2 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#192 TA Hudson</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 601 Brakke Drive</div>
+                        <div><span class="label">Location:</span> Hudson, WI 54016</div>
+                        <div><span class="label">Exit:</span> I-94, Exit 4</div>
+                        <div><span class="label">Phone:</span> (715) 386-5835</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA192</div>
+                        <div><span class="label">Fax:</span> (715) 386-1149</div>
+                    </div>
+                </div>
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#050 TA Madison</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 5901 Highway 51</div>
+                        <div><span class="label">Location:</span> DeForest, WI 53532</div>
+                        <div><span class="label">Exit:</span> I-90/I-94/I-39, Exit 132</div>
+                        <div><span class="label">Phone:</span> (608) 249-9000</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA050</div>
+                        <div><span class="label">Fax:</span> (608) 249-4115</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state-section" data-state="wyoming">
+            <div class="state-header">
+                <span>📍 WYOMING</span>
+                <span>1 stations</span>
+            </div>
+            <div class="stations-grid">
+                <div class="station-card" data-brand="ta" data-site-type="primary">
+                    <div class="station-header">
+                        <div class="station-name">#187 TA Cheyenne</div>
+                        <div class="brand-badge brand-ta">TA</div>
+                    </div>
+                    <div class="site-type primary">Primary</div>
+                    <div class="station-details">
+                        <div><span class="label">Address:</span> 4000 I-80 Service Road</div>
+                        <div><span class="label">Location:</span> Burns. WY 82003</div>
+                        <div><span class="label">Exit:</span> I-80, Exit 377</div>
+                        <div><span class="label">Phone:</span> (307) 547-3557</div>
+                        <div><span class="label">NaviGo ID:</span> CVEN-TA187</div>
+                        <div><span class="label">Fax:</span> (307) 547-3420</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const stateSections = document.querySelectorAll('.state-section');
+            
+            stateSections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        });
+        
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const stateSections = document.querySelectorAll('.state-section');
+                
+                stateSections.forEach(section => {
+                    if (filter === 'all') {
+                        section.style.display = 'block';
+                        // Reset all station cards to visible
+                        section.querySelectorAll('.station-card').forEach(card => {
+                            card.style.display = 'block';
+                        });
+                    } else if (filter === 'with-stations' && !section.classList.contains('no-stations')) {
+                        section.style.display = 'block';
+                        section.querySelectorAll('.station-card').forEach(card => {
+                            card.style.display = 'block';
+                        });
+                    } else if (filter === 'no-stations' && section.classList.contains('no-stations')) {
+                        section.style.display = 'block';
+                    } else if (filter === 'ta') {
+                        const stationCards = section.querySelectorAll('.station-card[data-brand="ta"]');
+                        if (stationCards.length > 0) {
+                            section.style.display = 'block';
+                            section.querySelectorAll('.station-card').forEach(card => {
+                                card.style.display = card.dataset.brand === 'ta' ? 'block' : 'none';
+                            });
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    } else if (filter === 'petro') {
+                        const stationCards = section.querySelectorAll('.station-card[data-brand="petro"]');
+                        if (stationCards.length > 0) {
+                            section.style.display = 'block';
+                            section.querySelectorAll('.station-card').forEach(card => {
+                                card.style.display = card.dataset.brand === 'petro' ? 'block' : 'none';
+                            });
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
