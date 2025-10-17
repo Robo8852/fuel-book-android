@@ -1,0 +1,1817 @@
+{
+  "ALABAMA": {
+    "fuel_stations": [
+      {
+        "name": "#348 Petro Shorter",
+        "number": "348",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "428 Main Street",
+        "phone": "(334) 727-3354",
+        "navigo_id": "CVEN-PE348",
+        "fax": "(334) 727-3576",
+        "city_state_zip": "Shorter, AL 36075",
+        "exit_info": "I-85, Exit 22"
+      },
+      {
+        "name": "#016 TA Tuscaloosa",
+        "number": "016",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "3501 Buttermilk Road",
+        "phone": "(205) 554-0215",
+        "navigo_id": "CVEN-TA016",
+        "fax": "(205) 553-0146",
+        "city_state_zip": "Cottondale, AL 35453",
+        "exit_info": "I-20/I-59, Exit 77"
+      }
+    ],
+    "terminals": []
+  },
+  "ALASKA": {
+    "fuel_stations": [],
+    "terminals": []
+  },
+  "ARIZONA": {
+    "fuel_stations": [
+      {
+        "name": "#306 Petro Eloy",
+        "number": "306",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "5235 North Sunland Gin Road",
+        "phone": "(520) 836-3983",
+        "navigo_id": "CVEN-PE306",
+        "fax": "(520) 836-3254",
+        "city_state_zip": "Eloy, AZ 85131",
+        "exit_info": "I-10, Exit 200"
+      },
+      {
+        "name": "#007 TA Eloy",
+        "number": "007",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "2949 North Toltec Road",
+        "phone": "(520) 466-7363",
+        "navigo_id": "CVEN-TA007",
+        "fax": "(520) 466-7536",
+        "city_state_zip": "Eloy, AZ 85131",
+        "exit_info": "I-10, Exit 203"
+      },
+      {
+        "name": "#315 Petro Kingman",
+        "number": "315",
+        "type": "Petro",
+        "site_type": "Exclusive",
+        "address": "970 South Blake Ranch Road",
+        "phone": "(928) 681-5246",
+        "navigo_id": "CVEN-PE315",
+        "fax": "(928) 681-5245",
+        "city_state_zip": "Kingman, AZ 86401",
+        "exit_info": "I-40, Exit 66"
+      },
+      {
+        "name": "#225 TA Tonopah",
+        "number": "225",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "1010 N. 339th Avenue",
+        "phone": "(623) 386-6443",
+        "navigo_id": "CVEN-TA225",
+        "fax": "(623) 386-5242",
+        "city_state_zip": "Tonopah, AZ 85354",
+        "exit_info": "I-10, Exit 103"
+      }
+    ],
+    "terminals": []
+  },
+  "ARKANSAS": {
+    "fuel_stations": [
+      {
+        "name": "#326 Petro North",
+        "number": "326",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "Little Rock",
+        "phone": "(501) 945-3206",
+        "navigo_id": "CVEN-PE326",
+        "fax": "(501) 955-4008",
+        "city_state_zip": "North Little Rock, AR 72117"
+      },
+      {
+        "name": "#311 Petro W. Memphis",
+        "number": "311",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "3900 Petro Rd",
+        "phone": "(870) 702-5540",
+        "navigo_id": "CVEN-PE311",
+        "fax": "(870)702-5547",
+        "city_state_zip": "West Memphis, AR 72301",
+        "exit_info": "I-40, Exit 280/ I-55, Exit 4"
+      }
+    ],
+    "terminals": []
+  },
+  "CALIFORNIA": {
+    "fuel_stations": [
+      {
+        "name": "#040 TA Corning",
+        "number": "040",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "3524 South Highway 99 W",
+        "phone": "(530) 824-4646",
+        "navigo_id": "CVEN-TA040",
+        "fax": "(530) 824-0547",
+        "city_state_zip": "Corning, CA 96021",
+        "exit_info": "I-5, Exit 630"
+      },
+      {
+        "name": "#170 TA Livingston",
+        "number": "170",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "435 Winton Parkway",
+        "phone": "(209) 394-4418",
+        "navigo_id": "CVEN-TA170",
+        "fax": "(209) 394-1419",
+        "city_state_zip": "Livingston, CA 95334",
+        "exit_info": "SR 99, Exit 203"
+      },
+      {
+        "name": "#162 TA Ontario*",
+        "number": "162",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "4265 East Guasti Road",
+        "phone": "(909) 390-2525",
+        "navigo_id": "CVEN-TA162",
+        "fax": "(909) 605-6765",
+        "city_state_zip": "Ontario, CA 91761",
+        "exit_info": "I-10, Exit 57"
+      },
+      {
+        "name": "#163 TA Santa Nella",
+        "number": "163",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "12310 California Hwy 33",
+        "phone": "(209) 826-0741",
+        "navigo_id": "CVEN-TA163",
+        "fax": "(209) 826-6399",
+        "city_state_zip": "Santa Nella, CA 95322",
+        "exit_info": "I-5, Exit 407"
+      }
+    ],
+    "terminals": []
+  },
+  "COLORADO": {
+    "fuel_stations": [
+      {
+        "name": "#148 TA Commerce City",
+        "number": "148",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "5101 Quebec Street",
+        "phone": "(303) 286-0123",
+        "navigo_id": "CVEN-TA148",
+        "fax": "(303) 286-6781",
+        "city_state_zip": "Commerce City, CO 80022",
+        "exit_info": "I-70/I-270, Exit 278"
+      },
+      {
+        "name": "#174 TA Wheat Ridge",
+        "number": "174",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "12151 West 44th Avenue",
+        "phone": "(303) 423-8250",
+        "navigo_id": "CVEN-TA174",
+        "fax": "(303) 420-4694",
+        "city_state_zip": "Wheat Ridge, CO 80033",
+        "exit_info": "I-70, Exit 266"
+      }
+    ],
+    "terminals": []
+  },
+  "CONNECTICUT": {
+    "fuel_stations": [
+      {
+        "name": "#171 TA New Haven",
+        "number": "171",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "3 East Industrial Road",
+        "phone": "(203) 481-0301",
+        "navigo_id": "CVEN-TA171",
+        "fax": "(203) 871-5000",
+        "city_state_zip": "Branford, CT 06405",
+        "exit_info": "I-95, Exit 56"
+      }
+    ],
+    "terminals": []
+  },
+  "DELAWARE": {
+    "fuel_stations": [],
+    "terminals": []
+  },
+  "FLORIDA": {
+    "fuel_stations": [
+      {
+        "name": "#247 TA Baldwin",
+        "number": "247",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "1024 US 301 South",
+        "phone": "(904) 266-4281",
+        "navigo_id": "CVEN-TA247",
+        "fax": "(904) 266-9614",
+        "city_state_zip": "Baldwin, FL 32234",
+        "exit_info": "I-10, Exit 343"
+      },
+      {
+        "name": "#248 TA Jacksonville South",
+        "number": "248",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "Jacksonville South",
+        "phone": "(904) 829-3946",
+        "navigo_id": "CVEN-TA248",
+        "fax": "(904) 824-4115",
+        "city_state_zip": "Jacksonville, FL 32259"
+      },
+      {
+        "name": "#178 TA Marianna",
+        "number": "178",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "2112 Highway 71 South",
+        "phone": "(850) 526-3303",
+        "navigo_id": "CVEN-TA178",
+        "fax": "(850) 482-8953",
+        "city_state_zip": "Marianna, FL 32448",
+        "exit_info": "I-10, Exit 142"
+      },
+      {
+        "name": "#158 TA Tampa*",
+        "number": "158",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "11706 Tampa Gateway Blvd.",
+        "phone": "(813) 262-1560",
+        "navigo_id": "CVEN-TA158",
+        "fax": "(813) 262-1550",
+        "city_state_zip": "Seffner, FL 33584",
+        "exit_info": "I-4, Exit 10"
+      },
+      {
+        "name": "#197 TA Vero Beach",
+        "number": "197",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "8909 20th Street",
+        "phone": "(772) 562-1791",
+        "navigo_id": "CVEN-TA197",
+        "fax": "(772) 569-0433",
+        "city_state_zip": "Vero Beach, FL 39266",
+        "exit_info": "I-95, Exit 147"
+      },
+      {
+        "name": "#053 TA Wildwood",
+        "number": "053",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "556 E. State Route 44",
+        "phone": "(352) 748-2501",
+        "navigo_id": "CVEN-TA053",
+        "fax": "(352) 748-2390",
+        "city_state_zip": "Wildwood, FL 34785",
+        "exit_info": "I-75, Exit 329"
+      }
+    ],
+    "terminals": []
+  },
+  "GEORGIA": {
+    "fuel_stations": [
+      {
+        "name": "#045 TA Madison",
+        "number": "045",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "2021 Eatonton Rd.",
+        "phone": "(706) 342-4176",
+        "navigo_id": "CVEN-TA045",
+        "fax": "(706) 342-2390",
+        "city_state_zip": "Madison, GA 30650",
+        "exit_info": "I-20/US441, Exit 114"
+      },
+      {
+        "name": "#146 TA Cartersville",
+        "number": "146",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "1981 Cassville-White Road",
+        "phone": "(770) 607-8885",
+        "navigo_id": "CVEN-TA146",
+        "fax": "(770) 607-7265",
+        "city_state_zip": "Cartersville, GA 30121",
+        "exit_info": "I-75, Exit 296"
+      },
+      {
+        "name": "#156 TA Commerce",
+        "number": "156",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "30732 Hwy 441 South",
+        "phone": "(706) 335-5198",
+        "navigo_id": "CVEN-TA156",
+        "fax": "(706) 335-6729",
+        "city_state_zip": "Commerce, GA 30529",
+        "exit_info": "I-85/US441, Exit 149"
+      },
+      {
+        "name": "#268 TA Atlanta South",
+        "number": "268",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "122 Truckstop Way",
+        "phone": "(770) 775-2076",
+        "navigo_id": "CVEN-TA268",
+        "fax": "(770) 775-2807",
+        "city_state_zip": "Jackson, GA 30233",
+        "exit_info": "I-75/Hwy 36, Exit 201"
+      }
+    ],
+    "terminals": []
+  },
+  "HAWAII": {
+    "fuel_stations": [],
+    "terminals": []
+  },
+  "IDAHO": {
+    "fuel_stations": [
+      {
+        "name": "#167 TA Boise",
+        "number": "167",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "4115  Broadway",
+        "phone": "(208) 344-1091",
+        "navigo_id": "CVEN-TA167",
+        "fax": "(208) 345-7560",
+        "city_state_zip": "Boise, ID 83705",
+        "exit_info": "I-84, Exit 54"
+      }
+    ],
+    "terminals": []
+  },
+  "ILLINOIS": {
+    "fuel_stations": [
+      {
+        "name": "#092 TA Bloomington",
+        "number": "092",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "505 Truckers Lane",
+        "phone": "(309) 827-4676",
+        "navigo_id": "CVEN-TA092",
+        "fax": "(309) 828-6651",
+        "city_state_zip": "Bloomington, IL 61701",
+        "exit_info": "I-55/I-74/I-39, Exit 160"
+      },
+      {
+        "name": "#030 TA Chicago North",
+        "number": "030",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "16650 W. Russell Road",
+        "phone": "(847) 395-5580",
+        "navigo_id": "CVEN-TA030",
+        "fax": "(847) 395-5987",
+        "city_state_zip": "Zion, IL 60099",
+        "exit_info": "I-94, Exit 1/1A"
+      },
+      {
+        "name": "#035 TA Effingham",
+        "number": "035",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "1702 West Evergreen",
+        "phone": "(217) 347-7183",
+        "navigo_id": "CVEN-TA035",
+        "fax": "(217) 342-4029",
+        "city_state_zip": "Effingham, IL 62401",
+        "exit_info": "I-57/I-70, Exit 160"
+      },
+      {
+        "name": "#321 Petro Effingham",
+        "number": "321",
+        "type": "Petro",
+        "site_type": "Exclusive",
+        "address": "1805 West Fayette Avenue",
+        "phone": "(217) 347-0480",
+        "navigo_id": "CVEN-PE321",
+        "fax": "(217) 540-2939",
+        "city_state_zip": "Effingham, IL 62401",
+        "exit_info": "I-70/I-57, Exit 159"
+      },
+      {
+        "name": "#044 TA Elgin",
+        "number": "044",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "19 N 430 US Highway 20",
+        "phone": "(847) 683-4550",
+        "navigo_id": "CVEN-TA044",
+        "fax": "(847) 683-7542",
+        "city_state_zip": "Hampshire, IL 60140",
+        "exit_info": "I-90, Exit 42"
+      },
+      {
+        "name": "#236 TA Morris",
+        "number": "236",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "21 Romines Drive",
+        "phone": "(815) 942-5690",
+        "navigo_id": "CVEN-TA236",
+        "fax": "(815) 942-4371",
+        "city_state_zip": "Morris, IL 60450",
+        "exit_info": "I-80, Exit 112B"
+      },
+      {
+        "name": "#043 TA Mt. Vernon",
+        "number": "043",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "4510 Broadway",
+        "phone": "(618) 244-4242",
+        "navigo_id": "CVEN-TA043",
+        "fax": "(618) 244-9182",
+        "city_state_zip": "Mt. Vernon, IL 62864",
+        "exit_info": "I-57/I-64, MM95"
+      },
+      {
+        "name": "#199 TA Troy",
+        "number": "199",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "819 Edwardsville Road",
+        "phone": "(618) 667-9931",
+        "navigo_id": "CVEN-TA199",
+        "fax": "(618) 667-8051",
+        "city_state_zip": "Troy, IL 62294",
+        "exit_info": "I-55/I-70, Exit 18"
+      }
+    ],
+    "terminals": []
+  },
+  "INDIANA": {
+    "fuel_stations": [
+      {
+        "name": "#010 TA Gary",
+        "number": "010",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "2510 Burr St.",
+        "phone": "(219) 845-3721",
+        "navigo_id": "CVEN-TA010",
+        "fax": "(219) 844-0937",
+        "city_state_zip": "Gary, IN 46406",
+        "exit_info": "I-80/ I-94, Exit 6"
+      },
+      {
+        "name": "#065 TA Seymour",
+        "number": "065",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "2636 E. Tipton St.",
+        "phone": "(812) 522-6622",
+        "navigo_id": "CVEN-TA065",
+        "fax": "(812) 523-6699",
+        "city_state_zip": "Seymour, IN 47274",
+        "exit_info": "I-65/SR 50, Exit 50"
+      },
+      {
+        "name": "#241 TA DeMotte",
+        "number": "241",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "11166 W. State Road 10",
+        "phone": "(219) 987-7520",
+        "navigo_id": "CVEN-TA241",
+        "fax": "(219) 987-7692",
+        "city_state_zip": "DeMotte, IN 46310",
+        "exit_info": "I-65, Exit 230"
+      },
+      {
+        "name": "#380 Petro Gaston",
+        "number": "380",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "14000 W. 28 State Road",
+        "phone": "(765) 358-3326",
+        "navigo_id": "CVEN-PE380",
+        "fax": "(765) 358-0207",
+        "city_state_zip": "Gaston, IN 47342",
+        "exit_info": "I-69, Exit 245"
+      },
+      {
+        "name": "#173 TA Whitestown",
+        "number": "173",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "5930 East State Road 334",
+        "phone": "(317) 769-3291",
+        "navigo_id": "CVEN-TA173",
+        "fax": "(317) 769-6899",
+        "city_state_zip": "Whitestown, IN 46075",
+        "exit_info": "I-65, Exit 130"
+      }
+    ],
+    "terminals": []
+  },
+  "IOWA": {
+    "fuel_stations": [
+      {
+        "name": "#066 TA Council Bluffs",
+        "number": "066",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "3210 South Seven Street",
+        "phone": "(712) 366-2217",
+        "navigo_id": "CVEN-TA066",
+        "fax": "(712) 366-6939",
+        "city_state_zip": "Council Bluffs, IA 51501",
+        "exit_info": "I-80 & I-29, Exit 3"
+      }
+    ],
+    "terminals": []
+  },
+  "KANSAS": {
+    "fuel_stations": [
+      {
+        "name": "#252 TA Beto Junction",
+        "number": "252",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "2775 Highway 75",
+        "phone": "(620) 256-6311",
+        "navigo_id": "CVEN-TA252",
+        "fax": "(620) 256-6107",
+        "city_state_zip": "Lebo, KS 66856",
+        "exit_info": "U.S. 75 & I-35, Exit 155"
+      },
+      {
+        "name": "#366 Petro Salina",
+        "number": "366",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "2125 North 9th Street",
+        "phone": "(785) 825-7723",
+        "navigo_id": "CVEN-PE366",
+        "fax": "(785) 827-8992",
+        "city_state_zip": "Salina, KS 67401",
+        "exit_info": "I-70, Exit 252"
+      }
+    ],
+    "terminals": []
+  },
+  "KENTUCKY": {
+    "fuel_stations": [
+      {
+        "name": "#093 TA Florence",
+        "number": "093",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "7777 Burlington Pike",
+        "phone": "(859) 371-7166",
+        "navigo_id": "CVEN-TA093",
+        "fax": "(859) 283-5743",
+        "city_state_zip": "Florence, KY 41042",
+        "exit_info": "I-75, Exit 181"
+      },
+      {
+        "name": "#330 Petro Glendale",
+        "number": "330",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "554 W. Glendale",
+        "phone": "(270) 369-6840",
+        "navigo_id": "CVEN-PE330",
+        "fax": "(270) 369-6848",
+        "city_state_zip": "Glendale, KY 42740",
+        "exit_info": "I-65, Exit 86"
+      }
+    ],
+    "terminals": []
+  },
+  "LOUISIANA": {
+    "fuel_stations": [
+      {
+        "name": "#310 Petro Hammond",
+        "number": "310",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "2100 S.W. Railroad Avenue",
+        "phone": "(985) 542-4981",
+        "navigo_id": "CVEN-PE310",
+        "fax": "(985) 429-5908",
+        "city_state_zip": "Hammond, LA 70403",
+        "exit_info": "I-12, Exit 40"
+      },
+      {
+        "name": "#237 TA Greenwood",
+        "number": "237",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "8560 Greenwood Road",
+        "phone": "(318) 938-5411",
+        "navigo_id": "CVEN-TA237",
+        "fax": "(318) 938-5003",
+        "city_state_zip": "Greenwood, LA 71033",
+        "exit_info": "I-20, Exit 5"
+      },
+      {
+        "name": "#161 TA Lafayette",
+        "number": "161",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "1701 North University Avenue",
+        "phone": "(337) 237-0176",
+        "navigo_id": "CVEN-TA161",
+        "fax": "(337) 235-1713",
+        "city_state_zip": "Lafayette, LA 70507",
+        "exit_info": "I-10, Exit 101"
+      },
+      {
+        "name": "#180 TA Slidell",
+        "number": "180",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "1682 Gause Boulevard",
+        "phone": "(985) 643-9974",
+        "navigo_id": "CVEN-TA180",
+        "fax": "(985) 649-1676",
+        "city_state_zip": "Slidell, LA 70458",
+        "exit_info": "I-10, Exit 266"
+      }
+    ],
+    "terminals": []
+  },
+  "MAINE": {
+    "fuel_stations": [],
+    "terminals": []
+  },
+  "MARYLAND": {
+    "fuel_stations": [
+      {
+        "name": "#216 TA Baltimore*",
+        "number": "216",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "5501 O\u2019Donnell Street Cutoff",
+        "phone": "(410) 633-4611",
+        "navigo_id": "CVEN-TA216",
+        "fax": "(410) 633-4613",
+        "city_state_zip": "Baltimore, MD 21224",
+        "exit_info": "I-95, Exit 57"
+      },
+      {
+        "name": "#151 TA Baltimore South*",
+        "number": "151",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "Baltimore South*",
+        "phone": "(410) 799-3835",
+        "navigo_id": "CVEN-TA151",
+        "fax": "(410) 799-7736",
+        "city_state_zip": "Jessup, MD 20794"
+      }
+    ],
+    "terminals": []
+  },
+  "MASSACHUSETTS": {
+    "fuel_stations": [],
+    "terminals": []
+  },
+  "MICHIGAN": {
+    "fuel_stations": [
+      {
+        "name": "#089 TA Ann Arbor",
+        "number": "089",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "200 Baker Road",
+        "phone": "(734) 426-3951",
+        "navigo_id": "CVEN-TA089",
+        "fax": "(734) 426-8558",
+        "city_state_zip": "Dexter, MI 48130",
+        "exit_info": "I-94, Exit 167"
+      },
+      {
+        "name": "#069 TA Monroe",
+        "number": "069",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "1255 N Dixie Highway",
+        "phone": "(734) 384-7952",
+        "navigo_id": "CVEN-TA069",
+        "fax": "(734) 240-0453",
+        "city_state_zip": "Monroe, MI 48162",
+        "exit_info": "I-75, Exit 15"
+      },
+      {
+        "name": "#198 TA Saginaw",
+        "number": "198",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "6364 Dixie Highway",
+        "phone": "(989) 777-7650",
+        "navigo_id": "CVEN-TA198",
+        "fax": "(989) 777-9770",
+        "city_state_zip": "Bridgeport, MI 48722",
+        "exit_info": "I-75, Exit 144"
+      },
+      {
+        "name": "#116 TA Sawyer",
+        "number": "116",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "6100 Sawyer Road",
+        "phone": "(269) 426-4884",
+        "navigo_id": "CVEN-TA116",
+        "fax": "(269) 426-3719",
+        "city_state_zip": "Sawyer, MI 49125",
+        "exit_info": "I-94, Exit 12"
+      },
+      {
+        "name": "#243 TA Tekonsha",
+        "number": "243",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "15587 M-60",
+        "phone": "(517) 767-4135",
+        "navigo_id": "CVEN-TA243",
+        "fax": "(517) 767-3430",
+        "city_state_zip": "Tekonsha, MI 49092",
+        "exit_info": "I-69, Exit 25"
+      }
+    ],
+    "terminals": []
+  },
+  "MINNESOTA": {
+    "fuel_stations": [
+      {
+        "name": "#398 Petro Albert Lea",
+        "number": "398",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "820 Happy Trails Lane",
+        "phone": "(507) 373-4200",
+        "navigo_id": "CVEN-PE398",
+        "fax": "(507) 379-2646",
+        "city_state_zip": "Albert Lea, MN 56007",
+        "exit_info": "I-90/I-35, Exit 11"
+      },
+      {
+        "name": "#190 TA Rogers",
+        "number": "190",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "13400 Rogers Drive",
+        "phone": "(763) 428-2277",
+        "navigo_id": "CVEN-TA190",
+        "fax": "(763) 428-2007",
+        "city_state_zip": "Rogers, MN 55374",
+        "exit_info": "I-94, Exit 207"
+      }
+    ],
+    "terminals": []
+  },
+  "MISSISSIPPI": {
+    "fuel_stations": [
+      {
+        "name": "#328 Petro Jackson",
+        "number": "328",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "970 I-20 W. Frontage Road",
+        "phone": "(601) 292-0940",
+        "navigo_id": "CVEN-PE328",
+        "fax": "(601) 292-0947",
+        "city_state_zip": "Jackson, MS 39201",
+        "exit_info": "I-20 & I-55, Exit 45/45A"
+      }
+    ],
+    "terminals": []
+  },
+  "MISSOURI": {
+    "fuel_stations": [
+      {
+        "name": "#354 Petro Joplin",
+        "number": "354",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "4240 Highway 43",
+        "phone": "(417) 624-3400",
+        "navigo_id": "CVEN-PE354",
+        "fax": "(417) 673-0759",
+        "city_state_zip": "Joplin, MO 64804",
+        "exit_info": "I-44, Exit 4"
+      },
+      {
+        "name": "#460 Petro Oak Grove",
+        "number": "460",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "301 SW First Street",
+        "phone": "(816) 690-4455",
+        "navigo_id": "CVEN-PE370",
+        "fax": "(816) 690-3409",
+        "city_state_zip": "Oak Grove, MO 64075",
+        "exit_info": "I-70, Exit 28"
+      },
+      {
+        "name": "#052 TA Oak Grove",
+        "number": "052",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "100 North Broadway",
+        "phone": "(816) 690-4115",
+        "navigo_id": "CVEN-TA052",
+        "fax": "(816) 625-4555",
+        "city_state_zip": "Oak Grove, MO 64075",
+        "exit_info": "I-70, Exit 28"
+      }
+    ],
+    "terminals": []
+  },
+  "MONTANA": {
+    "fuel_stations": [
+      {
+        "name": "#261 TA Laurel",
+        "number": "261",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "11360 South Frontage Road",
+        "phone": "(406) 628-4324",
+        "navigo_id": "CVEN-TA261",
+        "fax": "(406) 628-8442",
+        "city_state_zip": "Laurel, MT 59044",
+        "exit_info": "I-90, Exit 437"
+      }
+    ],
+    "terminals": []
+  },
+  "NEBRASKA": {
+    "fuel_stations": [
+      {
+        "name": "#193 TA Grand Island",
+        "number": "193",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "8033 West Holling Road",
+        "phone": "(308) 382-5902",
+        "navigo_id": "CVEN-TA193",
+        "fax": "(308) 382-1229",
+        "city_state_zip": "Alda, NE 68810",
+        "exit_info": "I-80, Exit 305"
+      }
+    ],
+    "terminals": []
+  },
+  "NEVADA": {
+    "fuel_stations": [
+      {
+        "name": "#108 TA Las Vegas",
+        "number": "108",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "8050 Dean Martin Drive",
+        "phone": "(702) 361-1176",
+        "navigo_id": "CVEN-TA108",
+        "fax": "(702) 361-6349",
+        "city_state_zip": "Las Vegas, NV 89139",
+        "exit_info": "I-15, Exit 33"
+      },
+      {
+        "name": "#181 TA Mill City",
+        "number": "181",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "6000 E. Frontage Road",
+        "phone": "(775) 538-7311",
+        "navigo_id": "CVEN-TA181",
+        "fax": "(775) 538-7319",
+        "city_state_zip": "Mill City, NV 89418",
+        "exit_info": "I-80, Exit 151(W)/149(E)"
+      }
+    ],
+    "terminals": []
+  },
+  "NEW HAMPSHIRE": {
+    "fuel_stations": [
+      {
+        "name": "#211 TA Greenland",
+        "number": "211",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "108 Ocean Road",
+        "phone": "(603) 436-3636",
+        "navigo_id": "CVEN-TA211",
+        "fax": "(603) 436-1575",
+        "city_state_zip": "Greenland, NH 03840",
+        "exit_info": "I-95, Exit 3(N), 3B(S)"
+      }
+    ],
+    "terminals": []
+  },
+  "NEW JERSEY": {
+    "fuel_stations": [
+      {
+        "name": "#048 TA Bloomsburry",
+        "number": "048",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "975 S.R. 173",
+        "phone": "(908) 479-4136",
+        "navigo_id": "CVEN-TA048",
+        "fax": "(908) 479-4533",
+        "city_state_zip": "Bloomsbury, NJ 08804",
+        "exit_info": "I-78, Exit 7"
+      },
+      {
+        "name": "#314 Petro Bordentown*",
+        "number": "314",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "402 Rising Sun Square Road",
+        "phone": "(609) 298-6070",
+        "navigo_id": "CVEN-PE314",
+        "fax": "(609) 227-5033",
+        "city_state_zip": "Bordentown, NJ 08505",
+        "exit_info": "I-295, Exit 57/Tpike, Exit 7"
+      },
+      {
+        "name": "#006 TA Columbia",
+        "number": "006",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "2 Simpson Road",
+        "phone": "(908) 496-4124",
+        "navigo_id": "CVEN-TA006",
+        "fax": "(908) 496-4809",
+        "city_state_zip": "Columbia, NJ 07832",
+        "exit_info": "I-80, Exit 4A"
+      },
+      {
+        "name": "#218 TA Paulsboro",
+        "number": "218",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "171 Berkley Road",
+        "phone": "(856) 423-5500",
+        "navigo_id": "CVEN-TA218",
+        "fax": "(856) 423-6261",
+        "city_state_zip": "Paulsboro, NJ 08066",
+        "exit_info": "I-295, Exit 18"
+      }
+    ],
+    "terminals": []
+  },
+  "NEW MEXICO": {
+    "fuel_stations": [
+      {
+        "name": "#229 TA Moriarty",
+        "number": "229",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "1700 U.S. Route 66 West",
+        "phone": "(505) 832-4421",
+        "navigo_id": "CVEN-TA229",
+        "fax": "(505) 832-6643",
+        "city_state_zip": "Moriarty, NM 87035",
+        "exit_info": "I-40, Exit 194"
+      }
+    ],
+    "terminals": []
+  },
+  "NEW YORK": {
+    "fuel_stations": [
+      {
+        "name": "#207 TA Binghamton",
+        "number": "207",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "753 Upper Court Street",
+        "phone": "(607) 775-3500",
+        "navigo_id": "CVEN-TA207",
+        "fax": "(607) 775-1528",
+        "city_state_zip": "Binghamton, NY 13904",
+        "exit_info": "I-81 N, Exit 2W"
+      },
+      {
+        "name": "#208 TA Dansville",
+        "number": "208",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "9616 Commerce Drive",
+        "phone": "(585) 335-6023",
+        "navigo_id": "CVEN-TA208",
+        "fax": "(585) 335-2090",
+        "city_state_zip": "Dansville, NY 14437",
+        "exit_info": "I-390, Exit 5"
+      },
+      {
+        "name": "#209 TA Fultonville",
+        "number": "209",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "40 Riverside Drive",
+        "phone": "(518) 853-3411",
+        "navigo_id": "CVEN-TA209",
+        "fax": "(518) 853-4523",
+        "city_state_zip": "Fultonville, NY 12072",
+        "exit_info": "I-90, Exit 28"
+      },
+      {
+        "name": "#210 TA Maybrook",
+        "number": "210",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "125 Neelytown Road",
+        "phone": "(845) 457-3163",
+        "navigo_id": "CVEN-TA210",
+        "fax": "(845) 457-3492",
+        "city_state_zip": "Montgomery, NY 12549",
+        "exit_info": "I-84, Exit 5"
+      },
+      {
+        "name": "#194 TA Pembroke",
+        "number": "194",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "8420 Alleghany",
+        "phone": "(585) 599-4577",
+        "navigo_id": "CVEN-TA194",
+        "fax": "(585) 599-3456",
+        "city_state_zip": "Corfu, NY 14036",
+        "exit_info": "I-90, Exit 48A"
+      }
+    ],
+    "terminals": []
+  },
+  "NORTH CAROLINA": {
+    "fuel_stations": [
+      {
+        "name": "#221 TA Candler",
+        "number": "221",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "153 Wiggins Road",
+        "phone": "(828) 665-1156",
+        "navigo_id": "CVEN-TA221",
+        "fax": "(828) 665-0890",
+        "city_state_zip": "Candler, NC 28715",
+        "exit_info": "I-40, Exit 37"
+      },
+      {
+        "name": "#002 TA Greensboro",
+        "number": "002",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "1101 NC Highway 61",
+        "phone": "(336) 449-6060",
+        "navigo_id": "CVEN-TA002",
+        "fax": "(336) 449-0301",
+        "city_state_zip": "Whitsett, NC 27377",
+        "exit_info": "I-85/I-40, Exit 138"
+      },
+      {
+        "name": "#395 Petro Kenly",
+        "number": "395",
+        "type": "Petro",
+        "site_type": "Exclusive",
+        "address": "923 Johnston Parkway",
+        "phone": "(919) 284-5121",
+        "navigo_id": "CVEN-PE395",
+        "fax": "(919) 284-5092",
+        "city_state_zip": "Kenly, NC 27542",
+        "exit_info": "I-95, Exit 106"
+      },
+      {
+        "name": "#251 TA Mocksville",
+        "number": "251",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "1670 U.S. Highway 601 North",
+        "phone": "(336) 751-3815",
+        "navigo_id": "CVEN-TA251",
+        "fax": "(336) 751-4994",
+        "city_state_zip": "Mocksville, NC 27028",
+        "exit_info": "I-40, Exit 170"
+      }
+    ],
+    "terminals": []
+  },
+  "NORTH DAKOTA": {
+    "fuel_stations": [],
+    "terminals": []
+  },
+  "OHIO": {
+    "fuel_stations": [
+      {
+        "name": "#015 TA Lodi",
+        "number": "015",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "8834 Lake Road",
+        "phone": "(330) 769-2053",
+        "navigo_id": "CVEN-TA015",
+        "fax": "(330) 769-4609",
+        "city_state_zip": "NSeville, OH 44273",
+        "exit_info": "I-71/I-76, Exit 209"
+      },
+      {
+        "name": "#024 TA London",
+        "number": "024",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "940 US RT 42 NE",
+        "phone": "(740) 852-3810",
+        "navigo_id": "CVEN-TA024",
+        "fax": "(740) 845-1240",
+        "city_state_zip": "London, OH 43140",
+        "exit_info": "I-70/US 42, Exit 79"
+      },
+      {
+        "name": "#095 TA North Canton",
+        "number": "095",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "4450 Portage Street NW",
+        "phone": "(330) 494-7507",
+        "navigo_id": "CVEN-TA095",
+        "fax": "(330) 494-7911",
+        "city_state_zip": "North Canton, OH 44720",
+        "exit_info": "I-77, Exit 111"
+      },
+      {
+        "name": "#139 TA Jeffersonville",
+        "number": "139",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "12403 US Route 35 NW",
+        "phone": "(740) 948-2365",
+        "navigo_id": "CVEN-TA139",
+        "fax": "(740) 948-2564",
+        "city_state_zip": "Jeffersonville, OH 43128",
+        "exit_info": "I-71, Exit 65"
+      },
+      {
+        "name": "#058 TA Youngstown",
+        "number": "058",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "5400 Seventy Six Drive",
+        "phone": "(330) 793-4426",
+        "navigo_id": "CVEN-TA058",
+        "fax": "(330) 793-7889",
+        "city_state_zip": "Youngstown, OH 44515",
+        "exit_info": "I-80, Exit 223A"
+      },
+      {
+        "name": "#325 Petro North Baltimore",
+        "number": "325",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "North Baltimore",
+        "phone": "(419) 257-3744",
+        "navigo_id": "CVEN-PE325",
+        "fax": "(419) 257-5128",
+        "city_state_zip": "North Baltimore, OH 45872"
+      }
+    ],
+    "terminals": []
+  },
+  "OKLAHOMA": {
+    "fuel_stations": [
+      {
+        "name": "#036 TA Oklahoma City East",
+        "number": "036",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "Oklahoma City East",
+        "phone": "(405) 787-7411",
+        "navigo_id": "CVEN-TA036",
+        "fax": "(405) 789-2561",
+        "city_state_zip": "Oklahoma City, OK 73128"
+      },
+      {
+        "name": "#316 Petro Oklahoma City",
+        "number": "316",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "Oklahoma City",
+        "phone": "(405) 228-7040",
+        "navigo_id": "CVEN-TA316",
+        "fax": "(405) 228-7047",
+        "city_state_zip": "Oklahoma City, OK 73117"
+      }
+    ],
+    "terminals": []
+  },
+  "OREGON": {
+    "fuel_stations": [
+      {
+        "name": "#056 TA Aurora",
+        "number": "056",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "21856 Bents Road NE",
+        "phone": "(503) 678-2111",
+        "navigo_id": "CVEN-056",
+        "fax": "(503) 678-2571",
+        "city_state_zip": "Aurora, OR 97002",
+        "exit_info": "I-5, Exit 278"
+      },
+      {
+        "name": "#183 TA Troutdale",
+        "number": "183",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "790 N W Frontage Road",
+        "phone": "(503) 666-1588",
+        "navigo_id": "CVEN-TA183",
+        "fax": "(506) 665-3746",
+        "city_state_zip": "Troutdale, OR 97060",
+        "exit_info": "I-84, Exit 17"
+      }
+    ],
+    "terminals": []
+  },
+  "PENNSYLVANIA": {
+    "fuel_stations": [
+      {
+        "name": "#212 TA Bloomsburg",
+        "number": "212",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "6 Buckhorn Road",
+        "phone": "(570) 784-9400",
+        "navigo_id": "CVEN-TA212",
+        "fax": "(570) 784-9441",
+        "city_state_zip": "Bloomsburg, PA 17815",
+        "exit_info": "I-80, Exit 232"
+      },
+      {
+        "name": "#003 TA Brookville",
+        "number": "003",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "245 Allegheny Boulevard",
+        "phone": "(814) 849-3051",
+        "navigo_id": "CVEN-TA003",
+        "fax": "(814) 849-5259",
+        "city_state_zip": "Brookville, PA 15825",
+        "exit_info": "I-80, Exit 78"
+      },
+      {
+        "name": "#336 Petro Carlisle",
+        "number": "336",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "1201 Harrisburg Ave, Route 11",
+        "phone": "(717) 249-1919",
+        "navigo_id": "CVEN-PE336",
+        "fax": "(717) 258-2339",
+        "city_state_zip": "Carlisle, PA 17013",
+        "exit_info": "I-81, Exit 52 / I-76, Exit 226"
+      },
+      {
+        "name": "#213 TA Greencastle",
+        "number": "213",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "10835 John Wayne Drive",
+        "phone": "(717) 597-7762",
+        "navigo_id": "CVEN-TA213",
+        "fax": "(717) 597-3506",
+        "city_state_zip": "Greencastle, PA 17225",
+        "exit_info": "I-81, Exit 5"
+      },
+      {
+        "name": "#215 TA Harborcreek",
+        "number": "215",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "4050 Depot Road",
+        "phone": "(814) 899-1919",
+        "navigo_id": "CVEN-TA215",
+        "fax": "(814) 899-7918",
+        "city_state_zip": "Erie, PA 16510",
+        "exit_info": "I-90, Exit 35"
+      },
+      {
+        "name": "#012 TA Harrisburg",
+        "number": "012",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "7848 Linglestown Road",
+        "phone": "(717) 652-4556",
+        "navigo_id": "CVEN-TA012",
+        "fax": "(717) 657-5012",
+        "city_state_zip": "Harrisburg, PA 17112",
+        "exit_info": "I-81, Exit 77"
+      }
+    ],
+    "terminals": []
+  },
+  "RHODE ISLAND": {
+    "fuel_stations": [],
+    "terminals": []
+  },
+  "SOUTH CAROLINA": {
+    "fuel_stations": [
+      {
+        "name": "#195 TA Florence",
+        "number": "195",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "2301 West Lucas Street",
+        "phone": "(843) 292-0386",
+        "navigo_id": "CVEN-TA195",
+        "fax": "(843) 667-6976",
+        "city_state_zip": "Florence, SC 29501",
+        "exit_info": "I-95, Exit 164"
+      },
+      {
+        "name": "#025 TA Spartanburg",
+        "number": "025",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "1402 East Main Street",
+        "phone": "(864) 433-0711",
+        "navigo_id": "CVEN-TA025",
+        "fax": "(864) 433-1495",
+        "city_state_zip": "Duncan, SC 29334",
+        "exit_info": "I-85, Exit 63"
+      },
+      {
+        "name": "#262 TA Columbia",
+        "number": "262",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "North",
+        "phone": "(803) 786-7680",
+        "navigo_id": "CVEN-TA262",
+        "fax": "(803) 735-8065",
+        "city_state_zip": "Columbia, SC 29203"
+      },
+      {
+        "name": "#179 TA Manning",
+        "number": "179",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "Rt 6 Box 200",
+        "phone": "(803) 473-2568",
+        "navigo_id": "CVEN-TA179",
+        "fax": "(803) 473-2822",
+        "city_state_zip": "Manning, SC 29102",
+        "exit_info": "I-95, SR 261, Exit 119"
+      },
+      {
+        "name": "#238 Petro Columbia",
+        "number": "238",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "2154 S. Beltline Blvd.",
+        "phone": "(803) 908-4889",
+        "navigo_id": "CVEN-PE238",
+        "fax": "(803) 908-4908",
+        "city_state_zip": "Columbia, SC 29201",
+        "exit_info": "I-77, Exit 5"
+      }
+    ],
+    "terminals": []
+  },
+  "SOUTH DAKOTA": {
+    "fuel_stations": [],
+    "terminals": []
+  },
+  "TENNESSEE": {
+    "fuel_stations": [
+      {
+        "name": "#117 TA Antioch",
+        "number": "117",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "13011 Old Hickory Boulevard",
+        "phone": "(615) 641-6731",
+        "navigo_id": "CVEN-TA117",
+        "fax": "(615) 641-3353",
+        "city_state_zip": "Antioch, TN 37013",
+        "exit_info": "I-24, Exit 62"
+      },
+      {
+        "name": "#157 TA Franklin",
+        "number": "157",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "4400 Peytonsville Road",
+        "phone": "(615) 794-8406",
+        "navigo_id": "CVEN-TA157",
+        "fax": "(615) 790-6510",
+        "city_state_zip": "Franklin, TN 37064",
+        "exit_info": "I-65, Exit 61"
+      },
+      {
+        "name": "#034 TA Nashville",
+        "number": "034",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "111 N. First Street",
+        "phone": "(615) 244-3682",
+        "navigo_id": "CVEN-TA034",
+        "fax": "(615) 255-2054",
+        "city_state_zip": "Nashville, TN 37213",
+        "exit_info": "I-24, Exit 48"
+      },
+      {
+        "name": "#255 TA Caryville",
+        "number": "255",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "305 Howard Baker Highway",
+        "phone": "(423) 562-3490",
+        "navigo_id": "CVEN-TA255",
+        "fax": "(423) 566-3700",
+        "city_state_zip": "Pioneer, TN 37847",
+        "exit_info": "I-75, Exit 141"
+      },
+      {
+        "name": "#312 Petro Knoxville",
+        "number": "312",
+        "type": "Petro",
+        "site_type": "Exclusive",
+        "address": "722 N. Watt Rd.",
+        "phone": "(865) 693-6542",
+        "navigo_id": "CVEN-PE312",
+        "fax": "(865) 560-3730",
+        "city_state_zip": "Knoxville, TN 37922",
+        "exit_info": "I-40/I-75, Exit 369"
+      }
+    ],
+    "terminals": []
+  },
+  "TEXAS": {
+    "fuel_stations": [
+      {
+        "name": "#055 TA Amarillo",
+        "number": "055",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "7000 E. Interstate 40",
+        "phone": "(806) 342-3080",
+        "navigo_id": "CVEN-TA055",
+        "fax": "(806) 371-8486",
+        "city_state_zip": "Amarillo, TX 79118",
+        "exit_info": "I-40, Exit 74"
+      },
+      {
+        "name": "#017 TA Baytown",
+        "number": "017",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "6800 Thompson Road",
+        "phone": "(281) 424-7772",
+        "navigo_id": "CVEN-TA017",
+        "fax": "(281) 424-3372",
+        "city_state_zip": "Baytown, TX 77521",
+        "exit_info": "I-10, Exit 789"
+      },
+      {
+        "name": "#150 TA Dallas South*",
+        "number": "150",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "7751 Bonnie View Road",
+        "phone": "(469) 941-3150",
+        "navigo_id": "CVEN-TA150",
+        "fax": "(469) 941-3155",
+        "city_state_zip": "Dallas, TX 75241",
+        "exit_info": "I-20, Exit 472"
+      },
+      {
+        "name": "#301 Petro El Paso",
+        "number": "301",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "1295 Horizon Boulevard",
+        "phone": "(915) 790-4529",
+        "navigo_id": "CVEN-PE301",
+        "fax": "(915) 790-4524",
+        "city_state_zip": "El Paso, TX 79927",
+        "exit_info": "I-10, Exit 37"
+      },
+      {
+        "name": "#231 TA Ganado",
+        "number": "231",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "802 E. York, Highway 59",
+        "phone": "(361) 771-3504",
+        "navigo_id": "CVEN-TA231",
+        "fax": "(361) 771-1984",
+        "city_state_zip": "Ganado, TX 77962",
+        "exit_info": "Hwy 59, Exit 522E"
+      },
+      {
+        "name": "#340 Petro Carl\u2019s Corner",
+        "number": "340",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "Carl\u2019s Corner",
+        "phone": "(254) 714-3000",
+        "navigo_id": "CVEN-PE340",
+        "fax": "(254) 714-3001",
+        "city_state_zip": "Hillsboro, TX 76645"
+      },
+      {
+        "name": "#232 TA New Braunfels",
+        "number": "232",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "4817 I-35 North",
+        "phone": "(830) 608-9395",
+        "navigo_id": "CVEN-232",
+        "fax": "(830) 608-0382",
+        "city_state_zip": "New Braunfels, TX 78130",
+        "exit_info": "I-35, Exit 193"
+      },
+      {
+        "name": "#147 TA San Antonio",
+        "number": "147",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "6170 I.H.-10 East",
+        "phone": "(210) 310-0145",
+        "navigo_id": "CVEN-TA147",
+        "fax": "(210) 661-0995",
+        "city_state_zip": "San Antonio, TX 78219",
+        "exit_info": "I-10, Exit 583"
+      },
+      {
+        "name": "#233 TA Terrell",
+        "number": "233",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "1700 Wilson Road",
+        "phone": "(972) 563-6939",
+        "navigo_id": "CVEN-TA233",
+        "fax": "(972) 563-5862",
+        "city_state_zip": "Terrell, TX 75161",
+        "exit_info": "I-20, Exit 503"
+      },
+      {
+        "name": "#302 Petro Weatherford",
+        "number": "302",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "Weatherford",
+        "phone": "(817) 599-9411",
+        "navigo_id": "CVEN-PE302",
+        "fax": "(817) 598-5524",
+        "city_state_zip": "Weatherford, TX 76086"
+      },
+      {
+        "name": "#333 TA Hillsboro",
+        "number": "333",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "160 State Hwy 77",
+        "phone": "(254) 283-6556",
+        "navigo_id": "CVEN-TA333",
+        "fax": "(254) 283-6968",
+        "city_state_zip": "Hillsboro, TX 76645",
+        "exit_info": "I-35, Exit 370"
+      },
+      {
+        "name": "#049 TA Rockwall",
+        "number": "049",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "2105 South Goliad St.",
+        "phone": "(972) 722-7450",
+        "navigo_id": "CVEN-TA049",
+        "fax": "(214) 771-4435",
+        "city_state_zip": "Rockwall, TX 75087",
+        "exit_info": "I-30, Exit 68"
+      },
+      {
+        "name": "#235 TA Edinburg",
+        "number": "235",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "8301 N.HWY 281",
+        "phone": "(956) 383-0788",
+        "navigo_id": "CVEN-TA235",
+        "fax": "(956) 383-2310",
+        "city_state_zip": "Edinburg, TX 78541",
+        "exit_info": "Hwy. 281, Exit FM 2812"
+      },
+      {
+        "name": "#266 TA Denton",
+        "number": "266",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "6420 North I-35",
+        "phone": "(940) 383-1458",
+        "navigo_id": "CVEN-TA266",
+        "fax": "(940) 898-1527",
+        "city_state_zip": "Denton, TX 76207",
+        "exit_info": "I-35 & US 77, Exit 471"
+      }
+    ],
+    "terminals": []
+  },
+  "UTAH": {
+    "fuel_stations": [
+      {
+        "name": "#186 TA Parowan",
+        "number": "186",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "1130 North 100",
+        "phone": "(435) 477-3311",
+        "navigo_id": "CVEN-TA186",
+        "fax": "(435) 477-8713",
+        "city_state_zip": "Parowan, UT 84761",
+        "exit_info": "I-15, Exit 78"
+      },
+      {
+        "name": "#060 TA Tooele",
+        "number": "060",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "8836 Clinton Landing Road",
+        "phone": "(801) 250-8585",
+        "navigo_id": "CVEN-TA060",
+        "fax": "(801) 252-2224",
+        "city_state_zip": "Tooele, UT 84074",
+        "exit_info": "I-80, Exit 99"
+      }
+    ],
+    "terminals": []
+  },
+  "VERMONT": {
+    "fuel_stations": [],
+    "terminals": []
+  },
+  "VIRGINIA": {
+    "fuel_stations": [
+      {
+        "name": "#001 TA Ashland",
+        "number": "001",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "100 North Carter Road",
+        "phone": "(804) 798-6011",
+        "navigo_id": "CVEN-TA001",
+        "fax": "(804) 798-7342",
+        "city_state_zip": "Ashland, VA 23005",
+        "exit_info": "I-95, Exit 92"
+      },
+      {
+        "name": "#142 TA Richmond",
+        "number": "142",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "10134 Lewistown Road",
+        "phone": "(804) 798-6021",
+        "navigo_id": "CVEN-TA142",
+        "fax": "(804) 752-6665",
+        "city_state_zip": "Ashland, VA 23005",
+        "exit_info": "I-95, Exit 89"
+      },
+      {
+        "name": "#143 TA Wytheville",
+        "number": "143",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "1025 Peppers Ferry Road",
+        "phone": "(276) 228-8676",
+        "navigo_id": "CVEN-TA143",
+        "fax": "(276) 228-8504",
+        "city_state_zip": "Wytheville, VA 24382",
+        "exit_info": "I-77, Exit 41/I-81, Exit 72"
+      }
+    ],
+    "terminals": []
+  },
+  "WASHINGTON": {
+    "fuel_stations": [
+      {
+        "name": "#176 TA Seattle East",
+        "number": "176",
+        "type": "TA",
+        "site_type": "Exclusive",
+        "address": "46600 S.E. North Bend Way",
+        "phone": "(425) 888-1119",
+        "navigo_id": "CVEN-TA176",
+        "fax": "(425) 888-9392",
+        "city_state_zip": "North Bend, WA 98045",
+        "exit_info": "1-90, Exit 34"
+      },
+      {
+        "name": "#339 Petro Spokane",
+        "number": "339",
+        "type": "Petro",
+        "site_type": "Primary",
+        "address": "10506 West Aero Road",
+        "phone": "(509) 842-1100",
+        "navigo_id": "CVEN-PE339",
+        "fax": "(509) 842-1105",
+        "city_state_zip": "Spokane, WA 99224",
+        "exit_info": "I-90, Exit 272"
+      }
+    ],
+    "terminals": []
+  },
+  "WEST VIRGINIA": {
+    "fuel_stations": [
+      {
+        "name": "#149 TA Hurricane",
+        "number": "149",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "4195 State Route 34",
+        "phone": "(304) 757-7600",
+        "navigo_id": "CVEN-TA149",
+        "fax": "(304) 757-7818",
+        "city_state_zip": "Hurricane, WV 25526",
+        "exit_info": "I-64, Exit 39"
+      },
+      {
+        "name": "#032 TA Wheeling",
+        "number": "032",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "196 W. Alexander Road",
+        "phone": "(304) 547-1521",
+        "navigo_id": "CVEN-TA032",
+        "fax": "(304) 547-9454",
+        "city_state_zip": "Valley Grove, WV 26060",
+        "exit_info": "I-70, Exit 11"
+      }
+    ],
+    "terminals": []
+  },
+  "WISCONSIN": {
+    "fuel_stations": [
+      {
+        "name": "#192 TA Hudson",
+        "number": "192",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "601 Brakke Drive",
+        "phone": "(715) 386-5835",
+        "navigo_id": "CVEN-TA192",
+        "fax": "(715) 386-1149",
+        "city_state_zip": "Hudson, WI 54016",
+        "exit_info": "I-94, Exit 4"
+      },
+      {
+        "name": "#050 TA Madison",
+        "number": "050",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "5901 Highway 51",
+        "phone": "(608) 249-9000",
+        "navigo_id": "CVEN-TA050",
+        "fax": "(608) 249-4115",
+        "city_state_zip": "DeForest, WI 53532",
+        "exit_info": "I-90/I-94/I-39, Exit 132"
+      }
+    ],
+    "terminals": []
+  },
+  "WYOMING": {
+    "fuel_stations": [
+      {
+        "name": "#187 TA Cheyenne",
+        "number": "187",
+        "type": "TA",
+        "site_type": "Primary",
+        "address": "4000 I-80 Service Road",
+        "phone": "(307) 547-3557",
+        "navigo_id": "CVEN-TA187",
+        "fax": "(307) 547-3420",
+        "city_state_zip": "Burns, WY 82003"
+      }
+    ],
+    "terminals": []
+  }
+}
